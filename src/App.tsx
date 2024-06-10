@@ -66,7 +66,7 @@ function App() {
 
 
     const barrier_column = 19;
-    terminal.onKey(async ({ key }) => {
+    terminal.onData(async (key) => {
       if (key.charCodeAt(0) === 127) {
         console.log(terminal.buffer.active.cursorX)
         if (barrier_column >= terminal.buffer.active.cursorX)

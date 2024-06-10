@@ -6,9 +6,10 @@ import {
 
 //I took the help of ASCII chart.. do the same if you want too :)
 function clearUpToRow(row: number = 10) {
-    for (let i = 1; i < row; i++) {
+    terminal.write(`\x1b[${row};1H`);
+    for (let i = row + 1; i < terminal.rows; i++) {
         terminal.write('\x1b[2K'); // Clear the entire line
-        terminal.write('\x1b[E'); // Move cursor down
+        terminal.write('\x1b[B'); // Move cursor down
     }
     // Move cursor to the specified row and clear from the cursor to the end of the screen
     terminal.write(`\x1b[${row};1H\x1b[J`);
