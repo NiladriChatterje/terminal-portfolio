@@ -12,6 +12,7 @@ export const terminal = new Terminal({
   cursorBlink: true,
   fontWeight: 900,
   fontWeightBold: 900,
+  fontSize: window.innerWidth < 950 ? 12 : 15,
   cursorWidth: 10,
   customGlyphs: true,
   cursorStyle: 'bar',
@@ -96,7 +97,7 @@ function App() {
         terminal.write(key)
       }
 
-      if (!current_command) { debouncer(); }
+      if (!current_command) debouncer();
       else
         clearTimeout(clearTimeoutID);
 
