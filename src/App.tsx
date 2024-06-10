@@ -20,11 +20,11 @@ export const terminal = new Terminal({
 
 });
 
-class TrieNode {
-  constructor(letter: string, map = new Map()) {
+// class TrieNode {
+//   constructor(letter: string, map = new Map()) {
 
-  }
-}
+//   }
+// }
 let clearTimeoutID: number;
 
 
@@ -64,15 +64,8 @@ function App() {
 
     terminal.writeln('')
 
-    function clearBufferUpToLength(length: number = 12) {
-      // Clear lines one by one until the specified length is reached
-      while (length-- > 0)
-        terminal.write('\b \b');
-    }
-
 
     const barrier_column = 19;
-    const barrier_command = 12;
     terminal.onKey(async ({ key }) => {
       if (key.charCodeAt(0) === 127) {
         console.log(terminal.buffer.active.cursorX)
