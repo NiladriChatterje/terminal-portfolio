@@ -1,14 +1,13 @@
-import { Terminal, ITerminalOptions } from "@xterm/xterm"
+import { Terminal } from "@xterm/xterm"
 import { FitAddon } from '@xterm/addon-fit';
 import { useEffect, useRef } from "react"
 import styles from './App.module.css'
 import toast, { Toaster } from "react-hot-toast";
 
-const TerminalStyle = {
-  width: '100%',
-  height: '100%',
-  position: 'fixed',
-  top: 0, left: 0
+class TrieNode {
+  constructor(letter: string, map = new Map()) {
+
+  }
 }
 
 function App() {
@@ -21,30 +20,65 @@ function App() {
       convertEol: true,
       cursorInactiveStyle: 'outline',
       cursorBlink: true,
-      fontWeight: 800,
+      fontWeight: 900,
+      fontWeightBold: 900,
       cursorWidth: 10,
       customGlyphs: true,
-      lineHeight: 1.6,
-      cursorStyle: 'underline',
-      rows: 40, cols: 170
+      lineHeight: 0.6,
+      cursorStyle: 'bar',
+
     });
     const fitAddon = new FitAddon();
     terminal.loadAddon(fitAddon);
-
+    const commands = [];
+    let current_command = ''
     terminal.open(terminalRef.current);
     fitAddon.fit();
-    terminal.write('welcome/{user}/$ >>');
-
-
+    terminal.write(`
+   ____            _    __       _ _       
+  |  _ \\___   _ __| |_ / _| ___ | (_) ___  
+  | |_) / _\\ | '__| __| |_ / _ \\| | |/ _ \\ 
+  |  __/ (_) | |  | |_|  _| (_) | | | (_) |
+  |_|  \\___/ |_|  \\__||_| \\___ /|_|_|\\___/     
+  NILADRI_CHATTERJEE
+`);
+    for (let i = 0; i < terminal.cols; i++)
+      terminal.write('_');
+    terminal.writeln('')
+    const barrier_column = 20;
     terminal.onKey(async ({ key }) => {
-      if (key.charCodeAt(0) === 127) terminal.write('\b \b')
+      if (key.charCodeAt(0) === 127) {
+        console.log(terminal.buffer.active.cursorX)
+        if (barrier_column >= terminal.buffer.active.cursorX)
+          return;
+        else
+          terminal.write('\b \b')
+      }
 
       else if (key.charCodeAt(0) === 13) {
-
-        terminal.write("\nwelcome/{user}/$ >>");
+        if (current_command) commands.push(current_command)
+        if (!current_command) toast.error('empty-command$')
+        current_command = ''
+        terminal.write("\nwelcome/{user}/$ >> ");
       }
-      else terminal.write(key)
+      else {
+        current_command += key;
+        terminal.write(key)
+      }
     })
+
+    terminal.options.theme = {
+      background: '#090a26',
+
+    }
+    function createArrowText(text: string) {
+      return "\x1b[107m " + `\x1b[30m${text}` + " \x1b[0m► \n";
+
+    }
+
+    const renderText = createArrowText("Welcome {User}");
+    terminal.write(renderText)
+    terminal.write("\nwelcome/{user}/$ >> ");
   }, [])
   return (
     <>
@@ -57,7 +91,5 @@ function App() {
 }
 
 export default App
-function data(arg1: string, arg2: void) {
-  throw new Error("Function not implemented.");
-}
+
 
