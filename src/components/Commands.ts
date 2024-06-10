@@ -25,6 +25,7 @@ const ExistingCommand = new Map<string | RegExp, any>(
     [
         ['man', `
   ${"ls".padEnd(window.innerWidth > 1200 ? 35 : 20)}${"list all the documents available"}
+  ${"ls skill".padEnd(window.innerWidth > 1200 ? 35 : 20)}${"list all the skills acquired"}
   ${"ls cf".padEnd(window.innerWidth > 1200 ? 35 : 20)}${"list all but only certificates"}
   ${"cls".padEnd(window.innerWidth > 1200 ? 35 : 20)}${"clear the console."}
   ${"show mca".padEnd(window.innerWidth > 1200 ? 35 : 20)}${"Display MCA result."}
