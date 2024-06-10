@@ -1,4 +1,5 @@
 import { Terminal, ITerminalOptions } from "@xterm/xterm"
+import { FitAddon } from '@xterm/addon-fit';
 import { useEffect, useRef } from "react"
 import styles from './App.module.css'
 
@@ -22,7 +23,11 @@ function App() {
       cursorStyle: 'underline',
       rows: 40, cols: 170
     });
+    const fitAddon = new FitAddon();
+    terminal.loadAddon(fitAddon);
+
     terminal.open(terminalRef.current);
+    fitAddon.fit();
     terminal.write('welcome/{user}/$ ');
   }, [])
   return (
