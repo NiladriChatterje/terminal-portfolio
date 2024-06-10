@@ -62,12 +62,12 @@ const icse_result = `
 
 const certificates = `
 ${"React(basics)".padEnd(35)}[\x1b[91mHackerrank\x1b[0m]
-https://www.hackerrank.com/certificates/25cd6205a8ab
+https://www.hackerrank.com/certificates/25cd6205a8ab\n
 
 
 
 ${"CSS(basics)".padEnd(35)}[\x1b[91mHackerrank\x1b[0m]
-https://www.hackerrank.com/certificates/202f6ed03ac4
+https://www.hackerrank.com/certificates/202f6ed03ac4\n
 
 
 

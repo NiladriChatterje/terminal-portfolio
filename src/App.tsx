@@ -1,6 +1,7 @@
 import { Terminal } from "@xterm/xterm"
 import { FitAddon } from '@xterm/addon-fit';
 import { useEffect, useRef } from "react"
+import { WebLinksAddon } from 'xterm-addon-web-links'
 import styles from './App.module.css'
 import toast, { Toaster } from "react-hot-toast";
 import { handleCommand } from './components/Commands'
@@ -41,8 +42,11 @@ function App() {
           terminal.write("Try : man ▶▷ ")
       }, 4000);
     }
+
+    const webLinksAddon = new WebLinksAddon();
     const fitAddon = new FitAddon();
     terminal.loadAddon(fitAddon);
+    terminal.loadAddon(webLinksAddon);
     const commands = [];
     let current_command = ''
     terminal.open(terminalRef.current);
