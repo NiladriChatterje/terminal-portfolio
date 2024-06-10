@@ -64,8 +64,15 @@ function App() {
 
     terminal.writeln('')
 
+    terminal.focus();
 
     const barrier_column = 19;
+    terminal.element?.addEventListener('touchstart', () => {
+      terminal.focus()
+    })
+    document.addEventListener('keydown', () => {
+      terminal.focus();
+    });
     terminal.onData(async (key) => {
       if (key.charCodeAt(0) === 127) {
         console.log(terminal.buffer.active.cursorX)
