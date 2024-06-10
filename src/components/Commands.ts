@@ -1,6 +1,6 @@
 import { terminal } from "../App";
 import {
-    bsc_final, fetchGithubRepos, redirectToRepo,
+    bsc_final, fetchGithubRepos, redirectToRepo, photo,
     certificates, github, hs_result, icse_result, linkedIn, mca_final
 } from './documents'
 
@@ -35,6 +35,7 @@ const ExistingCommand = new Map<string | RegExp, any>(
   ${"fetch x".padEnd(15)}${"provide twitter(X) link"}
   ${"github ls".padEnd(15)}${"list some of my top projects"}
   ${"github show <repo-name>".padEnd(15)}${"redirect to the repository"}
+  ${"reveal face".padEnd(15)}${"ASCII photo of mine (Just for fun :) )"}
        
         `],
         ["cls", clearUpToRow],
@@ -46,6 +47,7 @@ const ExistingCommand = new Map<string | RegExp, any>(
         ["fetch linkedin", () => { terminal.writeln(linkedIn) }],
         ["fetch github", () => { terminal.writeln(github) }],
         ["github ls", fetchGithubRepos],
+        ["reveal face", () => { terminal.writeln(photo) }],
     ]
 );
 
