@@ -169,7 +169,17 @@ function redirectToRepo(project: string) {
   window.open(`https://github.com/NiladriChatterje/${project}`, '_blank');
 }
 
+const skills = ["Java (with Servlet)", "Blockchain (Hybrid)", "RAG", "Docker", "Git", "Github",
+  "Next.Js_14+", "AWS (CLI+Dash)", "Node (core+express)",
+]
+function showSkills() {
+  if (window.innerWidth < 1280)
+    skills?.map(item => terminal.writeln(`◑ ${item}`))
+  else
+    skills?.map((item, i) => terminal.write(`◑ ${item}$${i % 3 === 0 ? '\n' : '\t\t'}`))
+
+}
 export {
-  mca_final, bsc_final, hs_result, icse_result, certificates
+  mca_final, bsc_final, hs_result, icse_result, certificates, showSkills
   , redirectToRepo, linkedIn, github, fetchGithubRepos, photo
 }

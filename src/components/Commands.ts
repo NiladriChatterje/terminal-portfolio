@@ -1,6 +1,6 @@
 import { terminal } from "../App";
 import {
-    bsc_final, fetchGithubRepos, redirectToRepo, photo,
+    bsc_final, fetchGithubRepos, redirectToRepo, photo, showSkills,
     certificates, github, hs_result, icse_result, linkedIn, mca_final
 } from './documents'
 
@@ -23,19 +23,19 @@ function showMCAResult() {
 const ExistingCommand = new Map<string | RegExp, any>(
     [
         ['man', `
-  ${"ls".padEnd(15)}${"list all the documents available"}
-  ${"ls cf".padEnd(15)}${"list all but only certificates"}
-  ${"cls".padEnd(15)}${"clear the console."}
-  ${"show mca".padEnd(15)}${"Display MCA result."}
-  ${"show bsc".padEnd(15)}${"Display BSc(H) result."}
-  ${"show hs".padEnd(15)}${"display Higher Secondary result"}
-  ${"show icse".padEnd(15)}${"display Secondary result"}
-  ${"fetch github".padEnd(15)}${"provide github link"}
-  ${"fetch linkedin".padEnd(15)}${"provide linkedin link"}
-  ${"fetch x".padEnd(15)}${"provide twitter(X) link"}
-  ${"github ls".padEnd(15)}${"list some of my top projects"}
-  ${"github show <repo-name>".padEnd(15)}${"redirect to the repository"}
-  ${"reveal face".padEnd(15)}${"ASCII photo of mine (Just for fun :) )"}
+  ${"ls".padEnd(window.innerWidth > 1200 ? 35 : 20)}${"list all the documents available"}
+  ${"ls cf".padEnd(window.innerWidth > 1200 ? 35 : 20)}${"list all but only certificates"}
+  ${"cls".padEnd(window.innerWidth > 1200 ? 35 : 20)}${"clear the console."}
+  ${"show mca".padEnd(window.innerWidth > 1200 ? 35 : 20)}${"Display MCA result."}
+  ${"show bsc".padEnd(window.innerWidth > 1200 ? 35 : 20)}${"Display BSc(H) result."}
+  ${"show hs".padEnd(window.innerWidth > 1200 ? 35 : 20)}${"display Higher Secondary result"}
+  ${"show icse".padEnd(window.innerWidth > 1200 ? 35 : 20)}${"display Secondary result"}
+  ${"fetch github".padEnd(window.innerWidth > 1200 ? 35 : 20)}${"provide github link"}
+  ${"fetch linkedin".padEnd(window.innerWidth > 1200 ? 35 : 20)}${"provide linkedin link"}
+  ${"fetch x".padEnd(window.innerWidth > 1200 ? 35 : 20)}${"provide twitter(X) link"}
+  ${"github ls".padEnd(window.innerWidth > 1200 ? 35 : 20)}${"list some of my top projects"}
+  ${"github show <repo>".padEnd(window.innerWidth > 1200 ? 35 : 20)}${"redirect to the repository"}
+  ${"reveal face".padEnd(window.innerWidth > 1200 ? 35 : 20)}${"ASCII photo of mine (Just for fun :) )"}
        
         `],
         ["cls", clearUpToRow],
@@ -48,6 +48,7 @@ const ExistingCommand = new Map<string | RegExp, any>(
         ["fetch github", () => { terminal.writeln(github) }],
         ["github ls", fetchGithubRepos],
         ["reveal face", () => { terminal.writeln(photo) }],
+        ["ls skill", showSkills]
     ]
 );
 
