@@ -130,10 +130,7 @@ function App() {
       }
 
       else if (key.charCodeAt(0) === 13) {
-        if (current_command == 'ls') {
-          console.log(rootNode);
-          return;
-        }
+
         if (!current_command) toast.error('empty-command$')
         try {
           handleCommand(current_command.trim());
