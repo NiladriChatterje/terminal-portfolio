@@ -147,6 +147,7 @@ const photo = `
     @@@@@@@@@@@@@@@@@@@@@@@@%**+++++++++++*@@@@@@@@@@@@@@@%@@@@@@@@@                   
     @@@@@@@@@@@@@@@@@@@@@@@@@%#*****++++*#@@@@@@@@@@@@@@@@@@@@@@@@@@`
 async function fetchGithubRepos() {
+  terminal.writeln("")
   const res = await fetch('https://api.github.com/users/NiladriChatterje/repos');
   const data: Data[] = await res.json();
   console.log(data);
