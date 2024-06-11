@@ -6,7 +6,7 @@ export const terminal = new Terminal({
     cursorBlink: true,
     fontWeight: 900,
     fontWeightBold: 900,
-    fontSize: window.innerWidth < 950 ? 11.5 : 15,
+    fontSize: window.innerWidth < 950 ? 12.5 : 15,
     cursorWidth: 10,
     customGlyphs: true,
     cursorStyle: 'bar',
