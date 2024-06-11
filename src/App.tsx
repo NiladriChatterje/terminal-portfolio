@@ -164,7 +164,7 @@ function App() {
     }
 
     function createArrowText() {
-      return `\x1b[107m \x1b[30mWelcome {User} \x1b[0m▶ \x1b[48;5;205m \x1b[30m~ \x1b[30mKnow \x1b[30mAbout \x1b[30mme ~ \x1b[0m▶ \n`;
+      return `\x1b[107m \x1b[30mWelcome {User} \x1b[48;5;205m\x1b[37m▶ \x1b[30m~ \x1b[30mKnow \x1b[30mAbout \x1b[30mme ~ \x1b[0m\x1b[38;5;205m▶\n`;
 
     }
 
