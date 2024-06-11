@@ -182,9 +182,9 @@ const skills = [{ name: "Java(SE+EE(Servlet))", progress: '65%' },
 function showSkills() {
   terminal.writeln("");
   if (window.innerWidth < 1280)
-    skills?.map(item => terminal.writeln(`◑ ${item.name.padEnd(28)}[    ${item.progress.padEnd(8)}     ]`))
+    skills?.map(item => terminal.writeln(`◑  ${item.name.padEnd(28)}[    ${item.progress.padEnd(8)}]`))
   else
-    skills?.map((item, i) => terminal.write(`◑ ${i % 3 === 2 ? item.name + '\n' : item.name.padEnd(30)}`))
+    skills?.map((item, i) => terminal.write(`◑  ${i % 3 === 2 ? item.name + '\n' : item.name.padEnd(30)}`))
   terminal.write("\n\x1b[103m \x1b[30m$command/here $ ↵ \x1b[0m\x1b[93m▶\x1b[0m ");
 }
 export {
