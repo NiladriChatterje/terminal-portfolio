@@ -12,4 +12,4 @@ export const terminal = new Terminal({
     cursorStyle: 'bar',
 
 });
-terminal.options.theme = { background: '#4f4e4e' }
+terminal.options.theme = { background: '#363d45' }
