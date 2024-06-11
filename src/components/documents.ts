@@ -170,15 +170,21 @@ function redirectToRepo(project: string) {
   terminal.write("\n\x1b[103m \x1b[30m$command/here $ ↵ \x1b[0m\x1b[93m▶\x1b[0m ");
 }
 
-const skills = ["Java(with Servlet)", "Blockchain(Hybrid)", "RAG", "Docker", "Git", "Github",
-  "Next.Js_14+", "AWS(CLI+Dash)", "Node(core+express)",
+const skills = [{ name: "Java(SE+EE(Servlet))", progress: '65%' },
+{ name: "Blockchain(Hybrid)", progress: '38%' },
+{ name: "RAG", progress: '42%' },
+{ name: "Docker", progress: '3%' }, { name: "Git", progress: '58%' },
+{ name: "Github", progress: '40%' },
+{ name: "Next.Js_14+", progress: '47%' },
+{ name: "AWS(CLI+Dash)", progress: '1%' },
+{ name: "Node(core+express)", progress: '37%' },
 ]
 function showSkills() {
   terminal.writeln("");
   if (window.innerWidth < 1280)
-    skills?.map(item => terminal.writeln(`◑ ${item}`))
+    skills?.map(item => terminal.writeln(`◑ ${item.name.padEnd(28)}[    ${item.progress}     ]`))
   else
-    skills?.map((item, i) => terminal.write(`◑ ${i % 3 === 2 ? item + '\n' : item.padEnd(30)}`))
+    skills?.map((item, i) => terminal.write(`◑ ${i % 3 === 2 ? item.name + '\n' : item.name.padEnd(30)}`))
   terminal.write("\n\x1b[103m \x1b[30m$command/here $ ↵ \x1b[0m\x1b[93m▶\x1b[0m ");
 }
 export {
