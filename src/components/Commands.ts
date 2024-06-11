@@ -1,22 +1,37 @@
-import { terminal } from "../App";
+import { terminal } from "./Terminal";
 import {
     bsc_final, fetchGithubRepos, redirectToRepo, photo, showSkills,
     certificates, github, hs_result, icse_result, linkedIn, mca_final
 } from './documents'
 
 //I took the help of ASCII chart.. do the same if you want too :)
-function clearUpToRow(row: number = 10) {
-    terminal.write(`\x1b[${row};1H`);
-    for (let i = row + 1; i < terminal.rows; i++) {
-        terminal.write('\x1b[2K'); // Clear the entire line
-        terminal.write('\x1b[B'); // Move cursor down
+export function clearUpToRow() {
+    terminal.clear();
+    terminal.write('\x1b[2K');
+    terminal.write(`
+   ____            _    __       _ _       
+  |  _ \\___   _ __| |_ / _| ___ | (_) ___  
+  | |_) / _\\ | '__| __| |_ / _ \\| | |/ _ \\ 
+  |  __/ (_) | |  | |_|  _| (_) | | | (_) |
+  |_|  \\___/ |_|  \\__||_| \\___ /|_|_|\\___/     
+  
+  NILADRI_CHATTERJEE
+`);
+    for (let i = 0; i < terminal.cols; i++)
+        terminal.write('_');
+    function createArrowText() {
+        return `\x1b[107m \x1b[30mWelcome {User} \x1b[0m▶ \x1b[48;5;205m \x1b[30m~ \x1b[30mKnow \x1b[30mAbout \x1b[30mme ~ \x1b[0m▶ \n`;
+
     }
-    // Move cursor to the specified row and clear from the cursor to the end of the screen
-    terminal.write(`\x1b[${row};1H\x1b[J`);
+
+    const renderText = createArrowText();
+    terminal.write(renderText)
+    terminal.write("\n\x1b[103m \x1b[30m$command/here $ ↵ \x1b[0m\x1b[93m▶\x1b[0m ");
 }
 
 function showMCAResult() {
     terminal.writeln(mca_final);
+    terminal.write("\n\x1b[103m \x1b[30m$command/here $ ↵ \x1b[0m\x1b[93m▶\x1b[0m ");
 }
 
 
@@ -42,14 +57,14 @@ const ExistingCommand = new Map<string | RegExp, any>(
         `],
         ["cls", clearUpToRow],
         ["show mca", showMCAResult],
-        ["show bsc", () => { terminal.writeln(bsc_final) }],
-        ["show hs", () => { terminal.writeln(hs_result) }],
-        ["show icse", () => { terminal.writeln(icse_result) }],
-        ["ls cf", () => { terminal.writeln(certificates) }],
-        ["fetch linkedin", () => { terminal.writeln(linkedIn) }],
-        ["fetch github", () => { terminal.writeln(github) }],
+        ["show bsc", () => { terminal.writeln(bsc_final); terminal.write("\n\x1b[103m \x1b[30m$command/here $ ↵ \x1b[0m\x1b[93m▶\x1b[0m "); }],
+        ["show hs", () => { terminal.writeln(hs_result); terminal.write("\n\x1b[103m \x1b[30m$command/here $ ↵ \x1b[0m\x1b[93m▶\x1b[0m "); }],
+        ["show icse", () => { terminal.writeln(icse_result); terminal.write("\n\x1b[103m \x1b[30m$command/here $ ↵ \x1b[0m\x1b[93m▶\x1b[0m "); }],
+        ["ls cf", () => { terminal.writeln(certificates); terminal.write("\n\x1b[103m \x1b[30m$command/here $ ↵ \x1b[0m\x1b[93m▶\x1b[0m "); }],
+        ["fetch linkedin", () => { terminal.writeln(linkedIn); terminal.write("\n\x1b[103m \x1b[30m$command/here $ ↵ \x1b[0m\x1b[93m▶\x1b[0m "); }],
+        ["fetch github", () => { terminal.writeln(github); terminal.write("\n\x1b[103m \x1b[30m$command/here $ ↵ \x1b[0m\x1b[93m▶\x1b[0m "); }],
         ["github ls", fetchGithubRepos],
-        ["reveal face", () => { terminal.writeln(photo) }],
+        ["reveal face", () => { terminal.writeln(photo); terminal.write("\n\x1b[103m \x1b[30m$command/here $ ↵ \x1b[0m\x1b[93m▶\x1b[0m "); }],
         ["ls skill", showSkills]
     ]
 );
@@ -68,7 +83,9 @@ export const handleCommand = (command: string) => {
     if (command != 'man')
         ExistingCommand.get(command)();
 
-    else
+    else {
         terminal.writeln(ExistingCommand.get('man'));
+        terminal.write("\n\x1b[103m \x1b[30m$command/here $ ↵ \x1b[0m\x1b[93m▶\x1b[0m ");
+    }
 
 }

@@ -1,4 +1,4 @@
-import { terminal } from "../App";
+import { terminal } from "./Terminal";
 
 const mca_final = `
   -------------------------------------
@@ -161,22 +161,24 @@ async function fetchGithubRepos() {
     data?.map((item, i) => terminal.write(`${item.name.padEnd(35)}${item.pushed_at?.split('T')[0]}${i % 2 ? '\n' : '\t\t'}`))
 
   }
-  terminal.write("\n\x1b[103m \x1b[30m$command/here $ \x1b[0m➤  ");
+  terminal.write("\n\x1b[103m \x1b[30m$command/here $ ↵ \x1b[0m\x1b[93m▶\x1b[0m ");
 }
 
 function redirectToRepo(project: string) {
   window.open(`https://github.com/NiladriChatterje/${project}`, '_blank');
+  terminal.write("\n\x1b[103m \x1b[30m$command/here $ ↵ \x1b[0m\x1b[93m▶\x1b[0m ");
 }
 
-const skills = ["Java (with Servlet)", "Blockchain (Hybrid)", "RAG", "Docker", "Git", "Github",
-  "Next.Js_14+", "AWS (CLI+Dash)", "Node (core+express)",
+const skills = ["Java(with Servlet)", "Blockchain(Hybrid)", "RAG", "Docker", "Git", "Github",
+  "Next.Js_14+", "AWS(CLI+Dash)", "Node(core+express)",
 ]
 function showSkills() {
+  terminal.writeln("");
   if (window.innerWidth < 1280)
     skills?.map(item => terminal.writeln(`◑ ${item}`))
   else
-    skills?.map((item, i) => terminal.write(`◑ ${item}$${i % 3 === 0 ? '\n' : '\t\t'}`))
-
+    skills?.map((item, i) => terminal.write(`◑ ${i % 3 === 2 ? item + '\n' : item.padEnd(30)}`))
+  terminal.write("\n\x1b[103m \x1b[30m$command/here $ ↵ \x1b[0m\x1b[93m▶\x1b[0m ");
 }
 export {
   mca_final, bsc_final, hs_result, icse_result, certificates, showSkills
