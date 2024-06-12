@@ -1,7 +1,8 @@
 import { terminal } from "./Terminal";
 import {
     bsc_final, fetchGithubRepos, redirectToRepo, photo, showSkills,
-    certificates, github, hs_result, icse_result, linkedIn, mca_final
+    certificates, github, hs_result, icse_result, linkedIn, mca_final,
+    twitter
 } from './documents'
 
 //I took the help of ASCII chart.. do the same if you want too :)
@@ -63,6 +64,7 @@ const ExistingCommand = new Map<string | RegExp, any>(
         ["ls cf", () => { terminal.writeln(certificates); terminal.write("\n\x1b[103m \x1b[30m$command/here $ ↵ \x1b[0m\x1b[93m▶\x1b[0m "); }],
         ["fetch linkedin", () => { terminal.writeln(linkedIn); terminal.write("\n\x1b[103m \x1b[30m$command/here $ ↵ \x1b[0m\x1b[93m▶\x1b[0m "); }],
         ["fetch github", () => { terminal.writeln(github); terminal.write("\n\x1b[103m \x1b[30m$command/here $ ↵ \x1b[0m\x1b[93m▶\x1b[0m "); }],
+        ["fetch x", () => { terminal.writeln(twitter); terminal.write("\n\x1b[103m \x1b[30m$command/here $ ↵ \x1b[0m\x1b[93m▶\x1b[0m "); }],
         ["github ls", fetchGithubRepos],
         ["reveal face", () => { terminal.writeln(photo); terminal.write("\n\x1b[103m \x1b[30m$command/here $ ↵ \x1b[0m\x1b[93m▶\x1b[0m "); }],
         ["ls skill", showSkills]

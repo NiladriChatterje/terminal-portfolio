@@ -75,6 +75,10 @@ ${"Machine Learning(basics)".padEnd(35)}[\x1b[91mKaggle\x1b[0m]
 https://www.kaggle.com/learn/certification/niladri2000/intro-to-machine-learning
 
 `
+const twitter = `
+[twitter(X)]
+https://x.com/NiladriCha41705
+`;
 
 const linkedIn = `
 [LinkedIn]:
@@ -189,5 +193,5 @@ function showSkills() {
 }
 export {
   mca_final, bsc_final, hs_result, icse_result, certificates, showSkills
-  , redirectToRepo, linkedIn, github, fetchGithubRepos, photo
+  , redirectToRepo, linkedIn, github, fetchGithubRepos, photo, twitter
 }
