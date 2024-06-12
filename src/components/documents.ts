@@ -74,6 +74,10 @@ https://www.hackerrank.com/certificates/202f6ed03ac4\n
 ${"Machine Learning(basics)".padEnd(35)}[\x1b[91mKaggle\x1b[0m]
 https://www.kaggle.com/learn/certification/niladri2000/intro-to-machine-learning
 
+
+
+${"Machine Learning(Intermediate)".padEnd(35)}[\x1b[91mKaggle\x1b[0m]
+https://www.kaggle.com/learn/certification/niladri2000/intermediate-machine-learning
 `
 const twitter = `
 [twitter(X)]
