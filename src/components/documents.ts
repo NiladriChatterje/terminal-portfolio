@@ -78,6 +78,11 @@ https://www.kaggle.com/learn/certification/niladri2000/intro-to-machine-learning
 
 ${"Machine Learning(Intermediate)".padEnd(35)}[\x1b[91mKaggle\x1b[0m]
 https://www.kaggle.com/learn/certification/niladri2000/intermediate-machine-learning
+
+
+
+${"APIs & microservices(Professional)".padEnd(35)}[\x1b[91mFreeCodeCamp\x1b[0m]
+https://www.freecodecamp.org/certification/NiladriChatterjee/back-end-development-and-apis
 `
 const twitter = `
 [twitter(X)]
