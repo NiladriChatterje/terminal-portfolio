@@ -83,6 +83,11 @@ https://www.kaggle.com/learn/certification/niladri2000/intermediate-machine-lear
 
 ${"APIs & microservices(Professional)".padEnd(35)}[\x1b[91mFreeCodeCamp\x1b[0m]
 https://www.freecodecamp.org/certification/NiladriChatterjee/back-end-development-and-apis
+
+
+
+${"REST API(Intermediate)".padEnd(35)}[\x1b[91mHackerrank\x1b[0m]
+https://www.hackerrank.com/certificates/429912e4f318
 `
 const twitter = `
 [twitter(X)]
