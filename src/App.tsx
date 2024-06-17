@@ -119,6 +119,7 @@ function App() {
       terminal.focus();
     });
     terminal.onData(async (key) => {
+      if (terminal.buffer.active.cursorY <= 11 && key.charCodeAt(0) === 27) return;
       if (key.charCodeAt(0) === 127) {
         console.log(terminal.buffer.active.cursorX)
         if (barrier_column >= terminal.buffer.active.cursorX)
