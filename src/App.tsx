@@ -10,7 +10,7 @@ import { handleCommand } from './components/Commands'
 class TrieNode {
   letter: string;
   map: Map<string, TrieNode> = new Map();
-  isEnd?: boolean = true;
+  isEnd: boolean = true;
   constructor(letter: string) {
     this.letter = letter;
   }
@@ -27,27 +27,31 @@ class Trie {
     this.temp = this.HEAD;
   }
   addNext(current_command: string) {
-    this.temp = this.HEAD;
-    this.temp.isEnd = false;
+    this.reset();
     for (let i of current_command) {
       if (this.temp.map.has(i)) {
         this.temp.isEnd = false;
         this.temp = this.temp.map.get(i);
       } else {
         const trieNode = new TrieNode(i);
-        this.temp.map?.set(i, trieNode);
+        this.temp.map.set(i, trieNode);
+        this.temp.isEnd = false;
         this.temp = trieNode;
       }
     }
   }
 
-  dfs = (letter: string, node: TrieNode | any, res = '') => {
-    if (node.isEnd) return res;
+  dfs = (node: TrieNode | any, res = '', actual_cmd: string = '', arr: string[] = []) => {
+    if (node?.isEnd) {
+      arr.push(res);
+      res = actual_cmd;
+      return arr;
+    }
 
-    res += letter
-    for (const [key, value] of node.map)
-      this.dfs(key, value.map?.get(key), res);
-
+    for (const [_, value] of node.map) {
+      this.dfs(value, res + value.letter, actual_cmd, arr);
+    }
+    return arr;
   }
 
   fetch(current_command: string) {
@@ -56,13 +60,16 @@ class Trie {
     for (let i of current_command)
       if (this.temp.map.has(i))
         this.temp = this.temp.map.get(i);
+      else return;
 
-    for (const [key, _] of this.temp.map) {
-      let temp_str = current_command;
-      let temp_Trie = this.temp;
-      temp_str += this.dfs(key, temp_Trie);
-      terminal.writeln(temp_str);
-    }
+    //getting to last node
+
+    // for (const [key, _] of this.temp.map) {
+    let temp_str: string[];
+    temp_str = this.dfs(this.temp, current_command, current_command);
+    // terminal.writeln(temp_str);
+    console.log(temp_str)
+
 
   }
 
@@ -70,7 +77,7 @@ class Trie {
 
 let rootNode: Trie;
 let clearTimeoutID: number;
-
+let val: string;
 
 function App() {
 
@@ -131,12 +138,13 @@ function App() {
       }
 
       else if (key.charCodeAt(0) === 13) {
-
+        console.log(rootNode)
         if (!current_command) toast.error('empty-command$')
         try {
-          handleCommand(current_command.trim());
-          rootNode.addNext(current_command.trim())
-          if (current_command) commands.push(current_command)
+          val = current_command.trim()
+          handleCommand(val);
+          rootNode.addNext(val)
+          if (current_command) commands.push(val)
         } catch (e) {
           toast.error("command do not exist!");
           return;
@@ -151,7 +159,7 @@ function App() {
       if (!current_command) debouncer();
       else {
         clearTimeout(clearTimeoutID);
-        // rootNode.fetch(current_command);
+        rootNode.fetch(current_command);
       }
 
     })
