@@ -88,7 +88,7 @@ class Trie {
 
     console.log(temp_str);
     terminal.writeln('\n');
-    temp_str.map(item => terminal.write(' \x1b[38;5;3m> \x1b[97m' + item.padEnd(45) + '[ \x1b[48;5;15m    \x1b[38;5;0mHistory    \x1b[0m ]\n'))
+    temp_str.map(item => terminal.write(' \x1b[38;5;3m> \x1b[97m' + item.padEnd(window.innerWidth < 1200 ? 30 : 45) + '[ \x1b[48;5;15m    \x1b[38;5;0mHistory    \x1b[0m ]\n'))
 
     for (let i = 0; i <= temp_str.length; i++)
       terminal.write('\x1b[1A');
