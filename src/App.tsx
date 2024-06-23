@@ -85,7 +85,6 @@ class Trie {
     this.clearTerminalHistory()
 
     temp_str = this.dfs(this.temp, current_command, current_command);
-    prev_result_length = temp_str.length;
 
     console.log(temp_str);
     terminal.writeln('\n');
@@ -101,7 +100,6 @@ class Trie {
 let rootNode: Trie;
 let clearTimeoutID: number;
 let val: string;
-let prev_result_length: number = terminal.buffer.active.cursorX;;
 
 function App() {
 
