@@ -102,7 +102,6 @@ let clearTimeoutID: number;
 let val: string;
 
 function App() {
-
   const terminalRef = useRef<HTMLDivElement | any>(null);
 
   useEffect(() => {
