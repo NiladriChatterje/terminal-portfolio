@@ -191,7 +191,7 @@ function redirectToRepo(project: string) {
 const skills = [{ name: "Java(SE+EE(Servlet))", progress: '65%' },
 { name: "Blockchain(Hybrid)", progress: '38%' },
 { name: "RAG", progress: '42%' },
-{ name: "Docker", progress: '3%' }, { name: "Git", progress: '58%' },
+{ name: "Docker", progress: '36%' }, { name: "Git", progress: '58%' },
 { name: "Github", progress: '40%' },
 { name: "Next.Js_14+", progress: '47%' },
 { name: "AWS(CLI+Dash)", progress: '1%' },

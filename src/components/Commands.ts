@@ -39,8 +39,7 @@ function showMCAResult() {
 
 const ExistingCommand = new Map<string | RegExp, any>(
     [
-        ['man', `
-  ${"ls".padEnd(window.innerWidth > 1200 ? 35 : 20)}${"list all the documents available"}
+        ['man', `\n
   ${"ls skill".padEnd(window.innerWidth > 1200 ? 35 : 20)}${"list all the skills acquired"}
   ${"ls cf".padEnd(window.innerWidth > 1200 ? 35 : 20)}${"list all but only certificates"}
   ${"cls".padEnd(window.innerWidth > 1200 ? 35 : 20)}${"clear the console."}
@@ -53,9 +52,7 @@ const ExistingCommand = new Map<string | RegExp, any>(
   ${"fetch x".padEnd(window.innerWidth > 1200 ? 35 : 20)}${"provide twitter(X) link"}
   ${"github ls".padEnd(window.innerWidth > 1200 ? 35 : 20)}${"list some of my top projects"}
   ${"github show <repo>".padEnd(window.innerWidth > 1200 ? 35 : 20)}${"redirect to the repository"}
-  ${"reveal face".padEnd(window.innerWidth > 1200 ? 35 : 20)}${"ASCII photo of mine (Just for fun :) )"}
-       
-        `],
+  ${"reveal face".padEnd(window.innerWidth > 1200 ? 35 : 20)}${"ASCII photo of mine (Just for fun :) )"}\n`],
         ["cls", clearUpToRow],
         ["show mca", showMCAResult],
         ["show bsc", () => { terminal.writeln(bsc_final); terminal.write("\n\x1b[103m \x1b[30m$command/here $ ↵ \x1b[0m\x1b[93m▶\x1b[0m "); }],
@@ -84,7 +81,6 @@ export const handleCommand = (command: string) => {
     if (!ExistingCommand.has(command)) throw new Error();
     if (command != 'man')
         ExistingCommand.get(command)();
-
     else {
         terminal.writeln(ExistingCommand.get('man'));
         terminal.write("\n\x1b[103m \x1b[30m$command/here $ ↵ \x1b[0m\x1b[93m▶\x1b[0m ");

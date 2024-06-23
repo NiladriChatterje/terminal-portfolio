@@ -6,7 +6,7 @@ import styles from './App.module.css'
 import toast, { Toaster } from "react-hot-toast";
 import { handleCommand } from './components/Commands'
 
-
+let temp_str: string[] = [];
 class TrieNode {
   letter: string;
   map: Map<string, TrieNode> = new Map();
@@ -19,6 +19,7 @@ class TrieNode {
 class Trie {
   HEAD: TrieNode;
   temp: TrieNode | any;
+
   constructor() {
     this.HEAD = new TrieNode(' ');
     this.temp = this.HEAD;
@@ -41,7 +42,7 @@ class Trie {
     }
   }
 
-  dfs = (node: TrieNode | any, res = '', actual_cmd: string = '', arr: string[] = []) => {
+  dfs = (node: TrieNode | any, res = '', actual_cmd: string = '', arr: string[] = []): string[] => {
     if (node?.isEnd) {
       arr.push(res);
       res = actual_cmd;
@@ -54,23 +55,45 @@ class Trie {
     return arr;
   }
 
+  clearTerminalHistory() {
+    terminal.write('\x1b7');
+    let k = 5;
+    while (k-- > 0)
+      terminal.write('\n');
+
+    terminal.write('\x1b[4A')
+
+    terminal.write('\x1b[J');
+    terminal.write('\x1b8');
+  }
+
   fetch(current_command: string) {
     this.reset();
     if (this.temp?.isEnd) return;
+
     for (let i of current_command)
-      if (this.temp.map.has(i))
+      if (this.temp.map.has(i)) {
+        this.clearTerminalHistory()
         this.temp = this.temp.map.get(i);
-      else return;
+      }
+      else {
+        this.clearTerminalHistory()
+        return
+      };
 
-    //getting to last node
 
-    // for (const [key, _] of this.temp.map) {
-    let temp_str: string[];
+    this.clearTerminalHistory()
+
     temp_str = this.dfs(this.temp, current_command, current_command);
-    // terminal.writeln(temp_str);
-    console.log(temp_str)
+    prev_result_length = temp_str.length;
 
+    console.log(temp_str);
+    terminal.writeln('\n');
+    temp_str.map(item => terminal.write(' \x1b[38;5;3m> \x1b[97m' + item.padEnd(45) + '[ \x1b[48;5;15m    \x1b[38;5;0mHistory    \x1b[0m ]\n'))
 
+    for (let i = 0; i <= temp_str.length; i++)
+      terminal.write('\x1b[1A');
+    terminal.write('\x1b8');
   }
 
 }
@@ -78,6 +101,7 @@ class Trie {
 let rootNode: Trie;
 let clearTimeoutID: number;
 let val: string;
+let prev_result_length: number = terminal.buffer.active.cursorX;;
 
 function App() {
 
@@ -127,19 +151,23 @@ function App() {
     });
     terminal.onData(async (key) => {
       if (terminal.buffer.active.cursorY <= 11 && key.charCodeAt(0) === 27) return;
-      if (key.charCodeAt(0) === 127) {
+      if (key.charCodeAt(0) === 127 || key.charCodeAt(0) === 8) {
         console.log(terminal.buffer.active.cursorX)
         if (barrier_column >= terminal.buffer.active.cursorX)
           return;
         else {
-          current_command = current_command.slice(0, current_command.length - 1)
+          current_command = current_command.slice(0, -1)
           terminal.write('\b \b')
         }
       }
 
       else if (key.charCodeAt(0) === 13) {
-        console.log(rootNode)
-        if (!current_command) toast.error('empty-command$')
+        console.log(rootNode);
+
+        if (!current_command) {
+          toast.error('empty-command$')
+          return;
+        }
         try {
           val = current_command.trim()
           handleCommand(val);
@@ -156,7 +184,10 @@ function App() {
         terminal.write(key)
       }
 
-      if (!current_command) debouncer();
+      if (!current_command) {
+        rootNode.clearTerminalHistory()
+        debouncer();
+      }
       else {
         clearTimeout(clearTimeoutID);
         rootNode.fetch(current_command);
