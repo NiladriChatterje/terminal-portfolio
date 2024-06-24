@@ -40,6 +40,7 @@ class Trie {
         this.temp = trieNode;
       }
     }
+    this.clearTerminalHistory();
   }
 
   dfs = (node: TrieNode | any, res = '', actual_cmd: string = '', arr: string[] = []): string[] => {
