@@ -141,6 +141,12 @@ function App() {
     terminal.element?.addEventListener('touchstart', () => {
       terminal.focus()
     })
+    terminal.element?.addEventListener('keydown', () => {
+      terminal.focus()
+    })
+    terminalRef.current.addEventListener('keydown', () => {
+      terminal.focus();
+    })
     document.addEventListener('keydown', () => {
       terminal.focus();
     });
