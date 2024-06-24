@@ -1,6 +1,6 @@
 import { terminal } from "./Terminal";
 
-const mca_final = `
+const mca_final = `\n
   -------------------------------------
   |   SEMESTER - I    |       9.12    |
   |   SEMESTER - II   |       8.41    |
@@ -15,7 +15,7 @@ const mca_final = `
   -------------------------------------
 `
 
-const bsc_final = `
+const bsc_final = `\n
   -------------------------------------
   |   SEMESTER - I    |       6.676   |
   |   SEMESTER - II   |       7.918   |
@@ -34,7 +34,7 @@ const bsc_final = `
   -------------------------------------
 `
 
-const hs_result = `
+const hs_result = `\n
   -------------------------------------
   |   ENGLISH         |       82      |
   |   BENGALI         |       85      |
@@ -47,7 +47,7 @@ const hs_result = `
   -------------------------------------
 `;
 
-const icse_result = `
+const icse_result = `\n
   ---------------------------------------
   | ENGLISH             |       82      |
   | BENGALI             |       84      |
@@ -60,48 +60,48 @@ const icse_result = `
   ---------------------------------------
 `;
 
-const certificates = `
-${"React(basics)".padEnd(35)}[\x1b[91mHackerrank\x1b[0m]
-https://www.hackerrank.com/certificates/25cd6205a8ab\n
+const certificates = `\n
+ ${"React(basics)".padEnd(35)}[\x1b[91mHackerrank\x1b[0m]
+ https://www.hackerrank.com/certificates/25cd6205a8ab\n
+ 
+ 
+ 
+ ${"CSS(basics)".padEnd(35)}[\x1b[91mHackerrank\x1b[0m]
+ https://www.hackerrank.com/certificates/202f6ed03ac4\n
+ 
+ 
+ 
+ ${"Machine Learning(basics)".padEnd(35)}[\x1b[91mKaggle\x1b[0m]
+ https://www.kaggle.com/learn/certification/niladri2000/intro-to-machine-learning
+ 
+ 
+ 
+ ${"Machine Learning(Intermediate)".padEnd(35)}[\x1b[91mKaggle\x1b[0m]
+ https://www.kaggle.com/learn/certification/niladri2000/intermediate-machine-learning
+ 
+ 
+ 
+ ${"APIs & microservices(Professional)".padEnd(35)}[\x1b[91mFreeCodeCamp\x1b[0m]
+ https://www.freecodecamp.org/certification/NiladriChatterjee/back-end-development-and-apis
 
 
 
-${"CSS(basics)".padEnd(35)}[\x1b[91mHackerrank\x1b[0m]
-https://www.hackerrank.com/certificates/202f6ed03ac4\n
-
-
-
-${"Machine Learning(basics)".padEnd(35)}[\x1b[91mKaggle\x1b[0m]
-https://www.kaggle.com/learn/certification/niladri2000/intro-to-machine-learning
-
-
-
-${"Machine Learning(Intermediate)".padEnd(35)}[\x1b[91mKaggle\x1b[0m]
-https://www.kaggle.com/learn/certification/niladri2000/intermediate-machine-learning
-
-
-
-${"APIs & microservices(Professional)".padEnd(35)}[\x1b[91mFreeCodeCamp\x1b[0m]
-https://www.freecodecamp.org/certification/NiladriChatterjee/back-end-development-and-apis
-
-
-
-${"REST API(Intermediate)".padEnd(35)}[\x1b[91mHackerrank\x1b[0m]
-https://www.hackerrank.com/certificates/429912e4f318
+ ${"REST API(Intermediate)".padEnd(35)}[\x1b[91mHackerrank\x1b[0m]
+ https://www.hackerrank.com/certificates/429912e4f318
 `
-const twitter = `
-[twitter(X)]
-https://x.com/NiladriCha41705
+const twitter = `\n
+ [twitter(X)]
+ https://x.com/NiladriCha41705
 `;
 
-const linkedIn = `
-[LinkedIn]:
-https://www.linkedin.com/in/niladri-chatterjee-a64059267/
+const linkedIn = `\n
+ [LinkedIn]:
+ https://www.linkedin.com/in/niladri-chatterjee-a64059267/
 `;
 
-const github = `
-[Github]:
-https://github.com/NiladriChatterje
+const github = `\n
+ [Github]:
+ https://github.com/NiladriChatterje
 `
 
 interface Data {
