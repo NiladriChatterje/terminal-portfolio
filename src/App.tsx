@@ -151,8 +151,8 @@ function App() {
         if (barrier_column >= terminal.buffer.active.cursorX)
           return;
         else {
+          terminal.write('\b \b');
           current_command = current_command.slice(0, -1)
-          terminal.write('\b \b')
         }
       }
 
