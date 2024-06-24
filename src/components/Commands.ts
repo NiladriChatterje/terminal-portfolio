@@ -1,6 +1,6 @@
 import { terminal } from "./Terminal";
 import {
-    bsc_final, fetchGithubRepos, redirectToRepo, photo, showSkills,
+    bsc_final, fetchGithubRepos, redirectToRepo, showSkills,
     certificates, github, hs_result, icse_result, linkedIn, mca_final,
     twitter
 } from './documents'
@@ -51,8 +51,7 @@ const ExistingCommand = new Map<string | RegExp, any>(
   ${"fetch linkedin".padEnd(window.innerWidth > 1200 ? 35 : 20)}${"provide linkedin link"}
   ${"fetch x".padEnd(window.innerWidth > 1200 ? 35 : 20)}${"provide twitter(X) link"}
   ${"github ls".padEnd(window.innerWidth > 1200 ? 35 : 20)}${"list some of my top projects"}
-  ${"github show <repo>".padEnd(window.innerWidth > 1200 ? 35 : 20)}${"redirect to the repository"}
-  ${"reveal face".padEnd(window.innerWidth > 1200 ? 35 : 20)}${"ASCII photo of mine (Just for fun :) )"}\n`],
+  ${"github show <repo>".padEnd(window.innerWidth > 1200 ? 35 : 20)}${"redirect to the repository"}\n`],
         ["cls", clearUpToRow],
         ["show mca", showMCAResult],
         ["show bsc", () => { terminal.writeln(bsc_final); terminal.write("\n\x1b[103m \x1b[30m$command/here $ ↵ \x1b[0m\x1b[93m▶\x1b[0m "); }],
@@ -63,7 +62,6 @@ const ExistingCommand = new Map<string | RegExp, any>(
         ["fetch github", () => { terminal.writeln(github); terminal.write("\n\x1b[103m \x1b[30m$command/here $ ↵ \x1b[0m\x1b[93m▶\x1b[0m "); }],
         ["fetch x", () => { terminal.writeln(twitter); terminal.write("\n\x1b[103m \x1b[30m$command/here $ ↵ \x1b[0m\x1b[93m▶\x1b[0m "); }],
         ["github ls", fetchGithubRepos],
-        ["reveal face", () => { terminal.writeln(photo); terminal.write("\n\x1b[103m \x1b[30m$command/here $ ↵ \x1b[0m\x1b[93m▶\x1b[0m "); }],
         ["ls skill", showSkills]
     ]
 );
@@ -82,6 +80,7 @@ export const handleCommand = (command: string) => {
     if (command != 'man')
         ExistingCommand.get(command)();
     else {
+        terminal.write('\x1b[J');
         terminal.writeln(ExistingCommand.get('man'));
         terminal.write("\n\x1b[103m \x1b[30m$command/here $ ↵ \x1b[0m\x1b[93m▶\x1b[0m ");
     }

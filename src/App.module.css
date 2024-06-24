@@ -20,7 +20,7 @@
     background: rgba(77, 77, 77, 0.1);
     border-radius: 10px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(0.6px);
+    backdrop-filter: blur(1px);
     -webkit-backdrop-filter: blur(10px);
 
 }

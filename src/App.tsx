@@ -57,13 +57,10 @@ class Trie {
 
   clearTerminalHistory() {
     terminal.write('\x1b7');
+    terminal.write('\x1b[J');
     let k = 5;
     while (k-- > 0)
       terminal.write('\n');
-
-    terminal.write('\x1b[4A')
-
-    terminal.write('\x1b[J');
     terminal.write('\x1b8');
   }
 
@@ -71,24 +68,25 @@ class Trie {
     this.reset();
     if (this.temp?.isEnd) return;
 
-    for (let i of current_command)
-      if (this.temp.map.has(i)) {
-        this.clearTerminalHistory()
+    for (let i of current_command) {
+      if (this.temp.map.has(i))
         this.temp = this.temp.map.get(i);
-      }
-      else {
-        this.clearTerminalHistory()
+
+      else
         return
-      };
+      this.clearTerminalHistory()
+    }
 
-
-    this.clearTerminalHistory()
+    // this.clearTerminalHistory()
 
     temp_str = this.dfs(this.temp, current_command, current_command);
 
     console.log(temp_str);
     terminal.writeln('\n');
-    temp_str.map(item => terminal.write(' \x1b[38;5;3m> \x1b[97m' + item.padEnd(window.innerWidth < 1200 ? 30 : 45) + '[ \x1b[48;5;15m    \x1b[38;5;0mHistory    \x1b[0m ]\n'))
+    temp_str.map(item => {
+      terminal.write('\x1b[2K')
+      terminal.write(` \x1b[38;5;3m> \x1b[97m ${item.length > 25 ? `${item.slice(0, 23)}...`.padEnd(window.innerWidth < 1200 ? 30 : 45) : item.padEnd(window.innerWidth < 1200 ? 30 : 45)} [ \x1b[48;5;15m    \x1b[38;5;0mHistory    \x1b[0m ]\n`)
+    })
 
     for (let i = 0; i <= temp_str.length; i++)
       terminal.write('\x1b[1A');
@@ -168,8 +166,8 @@ function App() {
         try {
           val = current_command.trim()
           handleCommand(val);
-          rootNode.addNext(val)
-          if (current_command) commands.push(val)
+          rootNode.addNext(val);
+          if (val) commands.push(val)
         } catch (e) {
           toast.error("command do not exist!");
           return;
