@@ -82,7 +82,7 @@ export const handleCommand = (command: string) => {
     else {
         terminal.write('\x1b[J');
         terminal.writeln(ExistingCommand.get('man'));
-        terminal.write(`\n\x1b[103m \x1b[30m$command/here $ ↵ \x1b[0m\x1b[93m▶\x1b[0m  `);
+        terminal.write(`\n\x1b[103m \x1b[30m$command/here $ ↵ \x1b[0m\x1b[93m▶\x1b[0m `);
     }
 
 }

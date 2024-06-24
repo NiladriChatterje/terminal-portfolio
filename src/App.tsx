@@ -104,11 +104,12 @@ function App() {
 
   useEffect(() => {
     rootNode = new Trie();
+    let commands = false;
     const debouncer = function () {
       if (clearTimeoutID)
         clearInterval(clearTimeoutID);
       clearTimeoutID = setTimeout(() => {
-        if (!commands.length)
+        if (!commands)
           terminal.write("Try : man ▶▷ ")
       }, 4000);
     }
@@ -117,7 +118,6 @@ function App() {
     const fitAddon = new FitAddon();
     terminal.loadAddon(fitAddon);
     terminal.loadAddon(webLinksAddon);
-    const commands = [];
     let current_command = ''
     terminal.open(terminalRef.current);
     fitAddon.fit();
@@ -167,7 +167,9 @@ function App() {
           val = current_command.trim()
           handleCommand(val);
           rootNode.addNext(val);
-          if (val) commands.push(val)
+          if (val) commands = true;
+          if (window.innerWidth < 1200)
+            terminal.write(' ')
         } catch (e) {
           toast.error("command do not exist!");
           return;
