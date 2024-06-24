@@ -144,9 +144,9 @@ function App() {
     document.addEventListener('keydown', () => {
       terminal.focus();
     });
-    terminal.onData(async (key) => {
+    terminal.onData(async (key: string) => {
       if (terminal.buffer.active.cursorY <= 11 && key.charCodeAt(0) === 27) return;
-      if (key.charCodeAt(0) === 127 || key.charCodeAt(0) === 8) {
+      if (key.charCodeAt(0) === 127) {
         console.log(terminal.buffer.active.cursorX)
         if (barrier_column >= terminal.buffer.active.cursorX)
           return;
