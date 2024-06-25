@@ -146,13 +146,24 @@ function App() {
       terminal.focus()
     })
     terminal.element?.addEventListener('keydown', () => {
-      terminal.focus()
+      terminal.focus();
+      terminalRef.current.focus()
     })
     terminalRef.current.addEventListener('keydown', () => {
       terminal.focus();
+      terminalRef.current.focus()
+    });
+    window.addEventListener('keydown', () => {
+      terminal.focus();
+      terminalRef.current.focus()
+    });
+    document.addEventListener('keypress', () => {
+      terminal.focus();
+      terminalRef.current.focus()
     })
     document.addEventListener('keydown', () => {
       terminal.focus();
+      terminalRef.current.focus()
     });
     terminal.onData(async (key: string) => {
 
@@ -167,16 +178,15 @@ function App() {
           handleCommand(val);
           rootNode.addNext(val);
           if (val) commands = true;
-
-        } catch (e) {
-
-          toast.error("command do not exist!");
-        }
-        finally {
           if (/android/i.test(navigator.userAgent)
             || /iPad|iPhone|iPod/.test(navigator.userAgent))
             terminal.write(" ");
+        } catch (e) {
+
+          toast.error("command do not exist!");
+          return;
         }
+
         current_command = '';
       }
       else if (key.charCodeAt(0) === 127) {
@@ -184,7 +194,7 @@ function App() {
         if (barrier_column >= terminal.buffer.active.cursorX)
           return;
         else {
-          terminal.write('\b \b');
+          terminal.write('\x08 \x08');
           current_command = current_command.slice(0, -1)
         }
       }
