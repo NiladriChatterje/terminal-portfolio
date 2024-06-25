@@ -110,9 +110,12 @@ function App() {
       if (clearTimeoutID)
         clearInterval(clearTimeoutID);
       clearTimeoutID = setTimeout(() => {
-        if (!commands)
+        if (!commands) {
+          terminal.write('\x1b[22G');
+          terminal.write('\x1b[J');
           terminal.write("Try : man ▶▷ ")
-      }, 4000);
+        }
+      }, 1000);
     }
 
     const webLinksAddon = new WebLinksAddon();
@@ -152,20 +155,9 @@ function App() {
       terminal.focus();
     });
     terminal.onData(async (key: string) => {
-      if (terminal.buffer.active.cursorY <= 11 && key.charCodeAt(0) === 27) return;
-      if (key.charCodeAt(0) === 127) {
-        console.log(terminal.buffer.active.cursorX)
-        if (barrier_column >= terminal.buffer.active.cursorX)
-          return;
-        else {
-          terminal.write('\b \b');
-          current_command = current_command.slice(0, -1)
-        }
-      }
 
-      else if (key.charCodeAt(0) === 13) {
+      if (key.charCodeAt(0) === 13) {
         console.log(rootNode);
-
         if (!current_command) {
           toast.error('empty-command$')
           return;
@@ -175,13 +167,26 @@ function App() {
           handleCommand(val);
           rootNode.addNext(val);
           if (val) commands = true;
-          if (window.innerWidth < 1200)
-            terminal.write(' ')
+
         } catch (e) {
+
           toast.error("command do not exist!");
-          return;
         }
-        current_command = ''
+        finally {
+          if (/android/i.test(navigator.userAgent)
+            || /iPad|iPhone|iPod/.test(navigator.userAgent))
+            terminal.write(" ");
+        }
+        current_command = '';
+      }
+      else if (key.charCodeAt(0) === 127) {
+        console.log(terminal.buffer.active.cursorX)
+        if (barrier_column >= terminal.buffer.active.cursorX)
+          return;
+        else {
+          terminal.write('\b \b');
+          current_command = current_command.slice(0, -1)
+        }
       }
       else {
         current_command += key;

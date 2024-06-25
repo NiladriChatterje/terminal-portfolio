@@ -75,7 +75,6 @@ export const handleCommand = (command: string) => {
         redirectToRepo(project.trim());
         return;
     }
-
     if (!ExistingCommand.has(command)) throw new Error();
     if (command != 'man')
         ExistingCommand.get(command)();
@@ -84,5 +83,4 @@ export const handleCommand = (command: string) => {
         terminal.writeln(ExistingCommand.get('man'));
         terminal.write(`\n\x1b[103m \x1b[30m$command/here $ ↵ \x1b[0m\x1b[93m▶\x1b[0m `);
     }
-
 }
