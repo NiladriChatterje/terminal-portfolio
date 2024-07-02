@@ -88,6 +88,12 @@ const certificates = `\n
 
  ${"REST API(Intermediate)".padEnd(35)}[\x1b[91mHackerrank\x1b[0m]
  https://www.hackerrank.com/certificates/429912e4f318
+
+
+
+
+ ${"Docker Essentials (Beginner)".padEnd(35)}[\x1b[91mHackerrank\x1b[0m]
+ https://www.credly.com/earner/earned/badge/a96ef2ac-bc5c-4a7b-bd89-b5ec4a4409d4
 `
 const twitter = `\n
  [twitter(X)]
