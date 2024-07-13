@@ -1,6 +1,6 @@
 import { terminal } from './Terminal';
 import {
-    bsc_final, fetchGithubRepos, redirectToRepo, showSkills,
+    bsc_final, fetchGithubRepos, redirectToRepo, showSkills, showLeetCode,
     certificates, github, hs_result, icse_result, linkedIn, mca_final,
     twitter
 } from './documents'
@@ -48,7 +48,7 @@ const ExistingCommand = new Map<string | RegExp, any>(
   ${`show hs`.padEnd(window.innerWidth > 1200 ? 35 : 20)}${`display Higher Secondary result`}
   ${`show icse`.padEnd(window.innerWidth > 1200 ? 35 : 20)}${`display Secondary result`}
   ${`fetch github`.padEnd(window.innerWidth > 1200 ? 35 : 20)}${`Provide github Profile`}
-  ${`fetch Leetcode`.padEnd(window.innerWidth > 1200 ? 35 : 20)}${`Provide Leetcode Profile`}
+  ${`fetch leetcode`.padEnd(window.innerWidth > 1200 ? 35 : 20)}${`Provide Leetcode Profile`}
   ${`fetch linkedin`.padEnd(window.innerWidth > 1200 ? 35 : 20)}${`Provide linkedin Profile`}
   ${`fetch x`.padEnd(window.innerWidth > 1200 ? 35 : 20)}${`provide twitter(X) link`}
   ${`github ls`.padEnd(window.innerWidth > 1200 ? 35 : 20)}${`list some of my top projects`}
@@ -63,7 +63,8 @@ const ExistingCommand = new Map<string | RegExp, any>(
         [`fetch github`, () => { terminal.writeln(github); terminal.write(`\n\x1b[103m \x1b[30m$command/here $ ↵ \x1b[0m\x1b[93m▶\x1b[0m `); }],
         [`fetch x`, () => { terminal.writeln(twitter); terminal.write(`\n\x1b[103m \x1b[30m$command/here $ ↵ \x1b[0m\x1b[93m▶\x1b[0m `); }],
         [`github ls`, fetchGithubRepos],
-        [`ls skill`, showSkills]
+        [`ls skill`, showSkills],
+        [`fetch leetcode`, () => { terminal.write(showLeetCode); terminal.write(`\n\x1b[103m \x1b[30m$command/here $ ↵ \x1b[0m\x1b[93m▶\x1b[0m `); }],
     ]
 );
 
