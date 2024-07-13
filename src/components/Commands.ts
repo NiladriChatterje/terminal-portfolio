@@ -47,8 +47,9 @@ const ExistingCommand = new Map<string | RegExp, any>(
   ${`show bsc`.padEnd(window.innerWidth > 1200 ? 35 : 20)}${`Display BSc(H) result.`}
   ${`show hs`.padEnd(window.innerWidth > 1200 ? 35 : 20)}${`display Higher Secondary result`}
   ${`show icse`.padEnd(window.innerWidth > 1200 ? 35 : 20)}${`display Secondary result`}
-  ${`fetch github`.padEnd(window.innerWidth > 1200 ? 35 : 20)}${`provide github link`}
-  ${`fetch linkedin`.padEnd(window.innerWidth > 1200 ? 35 : 20)}${`provide linkedin link`}
+  ${`fetch github`.padEnd(window.innerWidth > 1200 ? 35 : 20)}${`Provide github Profile`}
+  ${`fetch Leetcode`.padEnd(window.innerWidth > 1200 ? 35 : 20)}${`Provide Leetcode Profile`}
+  ${`fetch linkedin`.padEnd(window.innerWidth > 1200 ? 35 : 20)}${`Provide linkedin Profile`}
   ${`fetch x`.padEnd(window.innerWidth > 1200 ? 35 : 20)}${`provide twitter(X) link`}
   ${`github ls`.padEnd(window.innerWidth > 1200 ? 35 : 20)}${`list some of my top projects`}
   ${`github show <repo>`.padEnd(window.innerWidth > 1200 ? 35 : 20)}${`redirect to the repository`}\n`],

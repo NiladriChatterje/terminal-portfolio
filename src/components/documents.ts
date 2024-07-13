@@ -95,6 +95,11 @@ const certificates = `\n
  ${"Docker Essentials (Beginner)".padEnd(35)}[\x1b[91mHackerrank\x1b[0m]
  https://www.credly.com/earner/earned/badge/a96ef2ac-bc5c-4a7b-bd89-b5ec4a4409d4
 `
+const showLeetCode = `\n
+[LeetCode]
+https://leetcode.com/u/radongtxgpu/
+`
+
 const twitter = `\n
  [twitter(X)]
  https://x.com/NiladriCha41705
@@ -156,6 +161,6 @@ function showSkills() {
   terminal.write("\n\x1b[103m \x1b[30m$command/here $ ↵ \x1b[0m\x1b[93m▶\x1b[0m ");
 }
 export {
-  mca_final, bsc_final, hs_result, icse_result, certificates, showSkills
+  mca_final, bsc_final, hs_result, icse_result, certificates, showSkills, showLeetCode
   , redirectToRepo, linkedIn, github, fetchGithubRepos, twitter
 }
