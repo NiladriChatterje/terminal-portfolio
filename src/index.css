@@ -31,7 +31,7 @@ body {
   place-items: center;
   background-repeat: no-repeat;
   width: 100%;
-  min-height: 100dvh;
+  min-height: 100vh;
 }
 
 @media all and (max-width:950px) {

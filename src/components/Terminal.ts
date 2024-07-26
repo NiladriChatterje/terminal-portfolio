@@ -12,3 +12,5 @@ export const terminal = new Terminal({
     cursorStyle: 'bar',
 });
 terminal.options.theme = { background: '#02020200' }
+
+export const lastBarrier = { lastBarrier: 0 };

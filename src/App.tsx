@@ -1,4 +1,4 @@
-import { terminal } from "./components/Terminal"
+import { terminal, lastBarrier } from "./components/Terminal"
 import { FitAddon } from '@xterm/addon-fit';
 import { useEffect, useRef } from "react"
 import { WebLinksAddon } from 'xterm-addon-web-links'
@@ -7,7 +7,6 @@ import toast, { Toaster } from "react-hot-toast";
 import { handleCommand } from './components/Commands'
 
 let temp_str: string[] = [];
-let lastBarrier = 0;
 class TrieNode {
   letter: string;
   map: Map<string, TrieNode> = new Map();
@@ -128,10 +127,10 @@ function App() {
     fitAddon.fit();
     terminal.write(`
    ____            _    __       _ _       
-  |  _ \\___   _ __| |_ / _| ___ | (_) ___  
-  | |_) / _\\ | '__| __| |_ / _ \\| | |/ _ \\ 
-  |  __/ (_) | |  | |_|  _| (_) | | | (_) |
-  |_|  \\___/ |_|  \\__||_| \\___ /|_|_|\\___/     
+  |\x1b[47m __ \x1b[0m◣___   _ __|\x1b[47m \x1b[0m|_ / _| ___ |\x1b[47m \x1b[0m(_) ___
+  |\x1b[47m \x1b[0m|_)\x1b[47m \x1b[0m  _\\ |\x1b[47m \x1b[0m'\x1b[47m__\x1b[0m|\x1b[47m __\x1b[0m| |_ / _ \\|\x1b[47m \x1b[0m|\x1b[47m \x1b[0m|/\x1b[47m  _\x1b[0m◣ 
+  |\x1b[47m __ \x1b[0m◤ (_)||\x1b[47m \x1b[0m|  |\x1b[47m \x1b[0m|_|  _| (_) |\x1b[47m \x1b[0m|\x1b[47m \x1b[0m| (_)\x1b[47m \x1b[0m|
+  |\x1b[47m_\x1b[0m|  \\___/ |\x1b[47m_\x1b[0m|  \\\x1b[47m___\x1b[0m|_| \\___ /|\x1b[47m_\x1b[0m|\x1b[47m_\x1b[0m|\\\x1b[47m___\x1b[0m◤     
 
   NILADRI_CHATTERJEE
 `);
@@ -144,6 +143,9 @@ function App() {
 
     const barrier_column = 21;
     terminal.element?.addEventListener('touchstart', () => {
+      terminal.focus()
+    })
+    terminal.element?.addEventListener('touchend', () => {
       terminal.focus()
     })
     terminal.element?.addEventListener('keydown', () => {
@@ -179,9 +181,7 @@ function App() {
           handleCommand(val);
           rootNode.addNext(val);
           if (val) commands = true;
-          if (/android/i.test(navigator.userAgent)
-            || /iPad|iPhone|iPod/.test(navigator.userAgent))
-            terminal.write(" ");
+
         } catch (e) {
 
           toast.error("command do not exist!");
@@ -189,7 +189,7 @@ function App() {
         }
 
         current_command = '';
-        lastBarrier = terminal.buffer.active.cursorX;
+        lastBarrier.lastBarrier = terminal.buffer.active.cursorX;
       }
       else if (key.charCodeAt(0) === 127) {
         console.log(terminal.buffer.active.cursorX)
@@ -201,7 +201,7 @@ function App() {
         }
       }
       else if (key.charCodeAt(0) === 27) {
-        if (terminal.buffer.active.cursorX <= lastBarrier)
+        if (terminal.buffer.active.cursorX <= lastBarrier.lastBarrier)
           return;
       }
       else {

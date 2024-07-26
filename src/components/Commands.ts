@@ -1,4 +1,4 @@
-import { terminal } from './Terminal';
+import { terminal, lastBarrier } from './Terminal';
 import {
     bsc_final, fetchGithubRepos, redirectToRepo, showSkills, showLeetCode,
     certificates, github, hs_result, icse_result, linkedIn, mca_final,
@@ -11,11 +11,11 @@ export function clearUpToRow() {
     terminal.write('\x1b[2K');
     terminal.write(`
    ____            _    __       _ _       
-  |  _ \\___   _ __| |_ / _| ___ | (_) ___  
-  | |_) / _\\ | '__| __| |_ / _ \\| | |/ _ \\ 
-  |  __/ (_) | |  | |_|  _| (_) | | | (_) |
-  |_|  \\___/ |_|  \\__||_| \\___ /|_|_|\\___/     
-  
+  |\x1b[47m __ \x1b[0m◣___   _ __|\x1b[47m \x1b[0m|_ / _| ___ |\x1b[47m \x1b[0m(_) ___              
+  |\x1b[47m \x1b[0m|_)\x1b[47m \x1b[0m  _\\ |\x1b[47m \x1b[0m'\x1b[47m__\x1b[0m|\x1b[47m __\x1b[0m| |_ / _ \\|\x1b[47m \x1b[0m|\x1b[47m \x1b[0m|/\x1b[47m  _\x1b[0m◣ 
+  |\x1b[47m __ \x1b[0m◤ (_)||\x1b[47m \x1b[0m|  |\x1b[47m \x1b[0m|_|  _| (_) |\x1b[47m \x1b[0m|\x1b[47m \x1b[0m| (_)\x1b[47m \x1b[0m|
+  |\x1b[47m_\x1b[0m|  \\___/ |\x1b[47m_\x1b[0m|  \\\x1b[47m___\x1b[0m|_| \\___ /|\x1b[47m_\x1b[0m|\x1b[47m_\x1b[0m|\\\x1b[47m___\x1b[0m◤     
+
   NILADRI_CHATTERJEE
 `);
     for (let i = 0; i < terminal.cols; i++)
@@ -28,6 +28,7 @@ export function clearUpToRow() {
     const renderText = createArrowText();
     terminal.write(renderText)
     terminal.write(`\n\x1b[103m \x1b[30m$command/here $ ↵ \x1b[0m\x1b[93m▶\x1b[0m `);
+    lastBarrier.lastBarrier = terminal.buffer.active.cursorX;
 }
 
 function showMCAResult() {
