@@ -7,6 +7,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { handleCommand } from './components/Commands'
 
 let temp_str: string[] = [];
+let lastBarrier = 0;
 class TrieNode {
   letter: string;
   map: Map<string, TrieNode> = new Map();
@@ -188,6 +189,7 @@ function App() {
         }
 
         current_command = '';
+        lastBarrier = terminal.buffer.active.cursorX;
       }
       else if (key.charCodeAt(0) === 127) {
         console.log(terminal.buffer.active.cursorX)
@@ -197,6 +199,10 @@ function App() {
           terminal.write('\x08 \x08');
           current_command = current_command.slice(0, -1)
         }
+      }
+      else if (key.charCodeAt(0) === 27) {
+        if (terminal.buffer.active.cursorX <= lastBarrier)
+          return;
       }
       else {
         current_command += key;
