@@ -11,4 +11,4 @@ export const terminal = new Terminal({
     customGlyphs: true,
     cursorStyle: 'bar',
 });
-terminal.options.theme = { background: '#020202' }
+terminal.options.theme = { background: '#02020200' }
