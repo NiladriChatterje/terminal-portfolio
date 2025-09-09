@@ -86,7 +86,10 @@ class Trie {
     terminal.writeln('\n');
     temp_str.map(item => {
       terminal.write('\x1b[2K')
-      terminal.write(` \x1b[38;5;3m> \x1b[97m ${item.length > 25 ? `${item.slice(0, 23)}...`.padEnd(window.innerWidth < 1200 ? 30 : 45) : item.padEnd(window.innerWidth < 1200 ? 30 : 45)} [ \x1b[48;5;15m    \x1b[38;5;0mHistory    \x1b[0m ]\n`)
+      terminal.write(` \x1b[38;5;39m│\x1b[38;5;147m❯ \x1b[38;5;231m${item.length > 25
+        ? `${item.slice(0, 23)}...`.padEnd(window.innerWidth < 1200 ? 30 : 45)
+        : item.padEnd(window.innerWidth < 1200 ? 30 : 45)
+        }\x1b[38;5;240m [history]\x1b[0m\n`)
     })
 
     for (let i = 0; i <= temp_str.length; i++)
@@ -113,7 +116,7 @@ function App() {
         if (!commands) {
           terminal.write('\x1b[22G');
           terminal.write('\x1b[J');
-          terminal.write("Try : man ▶▷ ")
+          terminal.write("\x1b[38;5;240m💡 Try: \x1b[38;5;147mman\x1b[38;5;39m ❯ \x1b[0m")
         }
       }, 1000);
     }
@@ -125,23 +128,44 @@ function App() {
     let current_command = ''
     terminal.open(terminalRef.current);
     fitAddon.fit();
-    terminal.write(`
-   ____            _    __       _ _       
-  |\x1b[47m __ \x1b[0m◣___   _ __|\x1b[47m \x1b[0m|_ / _| ___ |\x1b[47m \x1b[0m(_) ___
-  |\x1b[47m \x1b[0m|_)\x1b[47m \x1b[0m  _\\ |\x1b[47m \x1b[0m'\x1b[47m__\x1b[0m|\x1b[47m __\x1b[0m| |_ / _ \\|\x1b[47m \x1b[0m|\x1b[47m \x1b[0m|/\x1b[47m  _\x1b[0m◣ 
-  |\x1b[47m __ \x1b[0m◤ (_)||\x1b[47m \x1b[0m|  |\x1b[47m \x1b[0m|_|  _| (_) |\x1b[47m \x1b[0m|\x1b[47m \x1b[0m| (_)\x1b[47m \x1b[0m|
-  |\x1b[47m_\x1b[0m|  \\___/ |\x1b[47m_\x1b[0m|  \\\x1b[47m___\x1b[0m|_| \\___ /|\x1b[47m_\x1b[0m|\x1b[47m_\x1b[0m|\\\x1b[47m___\x1b[0m◤     
+    // Write welcome header with improved styling
+    terminal.write('\n\x1b[38;5;39m');  // Set blue color
+    const isMobile = window.innerWidth < 768;
+    terminal.write(isMobile ? `
+   ╭────────────────────╮
+   │\x1b[38;5;39m██████╗  ██████╗ │
+   │██╔══██╗██╔═══██╗│
+   │██████╔╝██║   ██║│
+   │██╔═══╝ ██║   ██║│
+   │██║     ╚██████╔╝│
+   │╚═╝      ╚═════╝ │
+   ╰────────────────────╯
 
-  NILADRI_CHATTERJEE
-`);
-    for (let i = 0; i < terminal.cols; i++)
-      terminal.write('_');
+   \x1b[38;5;147m⚡ NILADRI\x1b[38;5;240m <Dev/>\x1b[38;5;39m\n` : `
+   ╭──────────────────────────────────────────╮
+   │\x1b[38;5;39m██████╗ ██████╗ ██████╗ ████████╗███████╗ ██████╗ ██╗     ██╗ ██████╗│
+   │██╔══██╗██╔═══██╗██╔══██╗╚══██╔══╝██╔════╝██╔═══██╗██║     ██║██╔═══██╗│
+   │██████╔╝██║   ██║██████╔╝   ██║   █████╗  ██║   ██║██║     ██║██║   ██║│
+   │██╔═══╝ ██║   ██║██╔══██╗   ██║   ██╔══╝  ██║   ██║██║     ██║██║   ██║│
+   │██║     ╚██████╔╝██║  ██║   ██║   ██║     ╚██████╔╝███████╗██║╚██████╔╝│
+   │╚═╝      ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚═╝      ╚═════╝ ╚══════╝╚═╝ ╚═════╝ │
+   ╰──────────────────────────────────────────╯
 
-    terminal.writeln('')
+   \x1b[38;5;147m⚡ NILADRI CHATTERJEE \x1b[38;5;240m<Full Stack Developer/>\x1b[38;5;39m\n`);
+
+    // Add decorative line below the header
+    terminal.write('\x1b[38;5;39m   ┏');
+    terminal.write('\x1b[38;5;39m┓\n\n');
+
+    // Add separator line
+    terminal.write('\x1b[38;5;39m');  // Set blue color
+    for (let i = 0; i < terminal.cols; i++) {
+      terminal.write('━');
+    }
+    terminal.write('\x1b[0m\n');
 
     terminal.focus();
 
-    const barrier_column = 21;
     terminal.element?.addEventListener('touchstart', () => {
       terminal.focus()
     })
@@ -192,12 +216,10 @@ function App() {
         lastBarrier.lastBarrier = terminal.buffer.active.cursorX;
       }
       else if (key.charCodeAt(0) === 127) {
-        console.log(terminal.buffer.active.cursorX)
-        if (barrier_column >= terminal.buffer.active.cursorX)
-          return;
-        else {
-          terminal.write('\x08 \x08');
-          current_command = current_command.slice(0, -1)
+        // Only handle backspace if we have text to delete
+        if (current_command.length > 0) {
+          terminal.write('\x1b[D \x1b[D'); // Move left, write space, move left again
+          current_command = current_command.slice(0, -1);
         }
       }
       else if (key.charCodeAt(0) === 27) {
@@ -222,14 +244,27 @@ function App() {
     debouncer();
 
 
-    function createArrowText() {
-      return `\x1b[107m \x1b[30mWelcome {User} \x1b[48;5;205m\x1b[37m▶ \x1b[30m~ \x1b[30mKnow \x1b[30mAbout \x1b[30mme ~ \x1b[0m\x1b[38;5;205m▶\n`;
+    function createWelcomeMessage() {
+      const username = 'Guest';
+      const date = new Date().toLocaleString('en-US', {
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true
+      });
 
+      return `\x1b[38;5;147m┌─══ \x1b[38;5;231mWelcome ${username} \x1b[38;5;147m══─┐
+│ \x1b[38;5;231m${date} \x1b[38;5;147m           │
+├────────────────────┘
+│
+│ \x1b[38;5;231mType 'help' to see available commands
+│ \x1b[38;5;231mType 'clear' to clear the terminal
+│ \x1b[38;5;231mUse Tab for command completion
+\x1b[38;5;147m└─────────────────────────────────\n`;
     }
 
-    const renderText = createArrowText();
-    terminal.write(renderText)
-    terminal.write("\n\x1b[103m \x1b[30m$command/here $ ↵ \x1b[0m\x1b[93m▶\x1b[0m ");
+    const welcomeMessage = createWelcomeMessage();
+    terminal.write(welcomeMessage);
+    terminal.write("\n\x1b[38;5;39m┌─[\x1b[38;5;231mportfolio\x1b[38;5;39m]─[\x1b[38;5;231m~/console\x1b[38;5;39m]\n└──╼ \x1b[38;5;231m❯\x1b[0m ");
   }, []);
 
   return (

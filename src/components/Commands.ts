@@ -9,31 +9,64 @@ import {
 export function clearUpToRow() {
     terminal.clear();
     terminal.write('\x1b[2K');
-    terminal.write(`
-   ____            _    __       _ _       
-  |\x1b[47m __ \x1b[0m◣___   _ __|\x1b[47m \x1b[0m|_ / _| ___ |\x1b[47m \x1b[0m(_) ___              
-  |\x1b[47m \x1b[0m|_)\x1b[47m \x1b[0m  _\\ |\x1b[47m \x1b[0m'\x1b[47m__\x1b[0m|\x1b[47m __\x1b[0m| |_ / _ \\|\x1b[47m \x1b[0m|\x1b[47m \x1b[0m|/\x1b[47m  _\x1b[0m◣ 
-  |\x1b[47m __ \x1b[0m◤ (_)||\x1b[47m \x1b[0m|  |\x1b[47m \x1b[0m|_|  _| (_) |\x1b[47m \x1b[0m|\x1b[47m \x1b[0m| (_)\x1b[47m \x1b[0m|
-  |\x1b[47m_\x1b[0m|  \\___/ |\x1b[47m_\x1b[0m|  \\\x1b[47m___\x1b[0m|_| \\___ /|\x1b[47m_\x1b[0m|\x1b[47m_\x1b[0m|\\\x1b[47m___\x1b[0m◤     
+    terminal.write('\n\x1b[38;5;39m');  // Set blue color
+    const isMobile = window.innerWidth < 768;
+    terminal.write(isMobile ? `
+   ╭────────────────────╮
+   │\x1b[38;5;39m██████╗  ██████╗ │
+   │██╔══██╗██╔═══██╗│
+   │██████╔╝██║   ██║│
+   │██╔═══╝ ██║   ██║│
+   │██║     ╚██████╔╝│
+   │╚═╝      ╚═════╝ │
+   ╰────────────────────╯
 
-  NILADRI_CHATTERJEE
-`);
-    for (let i = 0; i < terminal.cols; i++)
-        terminal.write('_');
-    function createArrowText() {
-        return `\x1b[107m \x1b[30mWelcome {User} \x1b[48;5;205m\x1b[37m▶ \x1b[30m~ \x1b[30mKnow \x1b[30mAbout \x1b[30mme ~ \x1b[0m\x1b[38;5;205m▶\n`;
+   \x1b[38;5;147m⚡ NILADRI\x1b[38;5;240m <Dev/>\x1b[38;5;39m\n` : `
+   ╭──────────────────────────────────────────╮
+   │\x1b[38;5;39m██████╗ ██████╗ ██████╗ ████████╗███████╗ ██████╗ ██╗     ██╗ ██████╗│
+   │██╔══██╗██╔═══██╗██╔══██╗╚══██╔══╝██╔════╝██╔═══██╗██║     ██║██╔═══██╗│
+   │██████╔╝██║   ██║██████╔╝   ██║   █████╗  ██║   ██║██║     ██║██║   ██║│
+   │██╔═══╝ ██║   ██║██╔══██╗   ██║   ██╔══╝  ██║   ██║██║     ██║██║   ██║│
+   │██║     ╚██████╔╝██║  ██║   ██║   ██║     ╚██████╔╝███████╗██║╚██████╔╝│
+   │╚═╝      ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚═╝      ╚═════╝ ╚══════╝╚═╝ ╚═════╝ │
+   ╰──────────────────────────────────────────╯
 
+   \x1b[38;5;147m⚡ NILADRI CHATTERJEE \x1b[38;5;240m<Full Stack Developer/>\x1b[38;5;39m\n`);
+
+    // Add decorative line below the header
+    terminal.write('\x1b[38;5;39m   ┏');
+    terminal.write('\x1b[38;5;39m┓\n\n');
+
+    // Add separator line in blue
+    terminal.write('\x1b[38;5;39m');  // Set blue color
+    for (let i = 0; i < terminal.cols; i++) {
+        terminal.write('━');
     }
+    terminal.write('\x1b[0m\n');
 
-    const renderText = createArrowText();
-    terminal.write(renderText)
-    terminal.write(`\n\x1b[103m \x1b[30m$command/here $ ↵ \x1b[0m\x1b[93m▶\x1b[0m `);
+    const date = new Date().toLocaleString('en-US', {
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true
+    });
+
+    const welcomeMessage = `\x1b[38;5;147m┌─══ \x1b[38;5;231mWelcome Guest \x1b[38;5;147m══─┐
+│ \x1b[38;5;231m${date} \x1b[38;5;147m           │
+├────────────────────┘
+│
+│ \x1b[38;5;231mType 'help' to see available commands
+│ \x1b[38;5;231mType 'clear' to clear the terminal
+│ \x1b[38;5;231mUse Tab for command completion
+\x1b[38;5;147m└─────────────────────────────────\n`;
+
+    terminal.write(welcomeMessage)
+    terminal.write("\n\x1b[38;5;231m┌─[\x1b[38;5;231mportfolio\x1b[38;5;231m]─[\x1b[38;5;231m~/console\x1b[38;5;231m]\n└──╼ \x1b[38;5;231m❯\x1b[0m ");
     lastBarrier.lastBarrier = terminal.buffer.active.cursorX;
 }
 
 function showMCAResult() {
     terminal.writeln(mca_final);
-    terminal.write(`\n\x1b[103m \x1b[30m$command/here $ ↵ \x1b[0m\x1b[93m▶\x1b[0m `);
+    terminal.write("\n\x1b[38;5;231m┌─[\x1b[38;5;231mportfolio\x1b[38;5;231m]─[\x1b[38;5;231m~/console\x1b[38;5;231m]\n└──╼ \x1b[38;5;231m❯\x1b[0m ");
 }
 
 
@@ -56,16 +89,16 @@ const ExistingCommand = new Map<string | RegExp, any>(
   ${`github show <repo>`.padEnd(window.innerWidth > 1200 ? 35 : 20)}${`redirect to the repository`}\n`],
         [`cls`, clearUpToRow],
         [`show mca`, showMCAResult],
-        [`show bsc`, () => { terminal.writeln(bsc_final); terminal.write(`\n\x1b[103m \x1b[30m$command/here $ ↵ \x1b[0m\x1b[93m▶\x1b[0m `); }],
-        [`show hs`, () => { terminal.writeln(hs_result); terminal.write(`\n\x1b[103m \x1b[30m$command/here $ ↵ \x1b[0m\x1b[93m▶\x1b[0m `); }],
-        [`show icse`, () => { terminal.writeln(icse_result); terminal.write(`\n\x1b[103m \x1b[30m$command/here $ ↵ \x1b[0m\x1b[93m▶\x1b[0m `); }],
-        [`ls cf`, () => { terminal.writeln(certificates); terminal.write(`\n\x1b[103m \x1b[30m$command/here $ ↵ \x1b[0m\x1b[93m▶\x1b[0m `); }],
-        [`fetch linkedin`, () => { terminal.writeln(linkedIn); terminal.write(`\n\x1b[103m \x1b[30m$command/here $ ↵ \x1b[0m\x1b[93m▶\x1b[0m `); }],
-        [`fetch github`, () => { terminal.writeln(github); terminal.write(`\n\x1b[103m \x1b[30m$command/here $ ↵ \x1b[0m\x1b[93m▶\x1b[0m `); }],
-        [`fetch x`, () => { terminal.writeln(twitter); terminal.write(`\n\x1b[103m \x1b[30m$command/here $ ↵ \x1b[0m\x1b[93m▶\x1b[0m `); }],
+        [`show bsc`, () => { terminal.writeln(bsc_final); terminal.write("\n\x1b[38;5;231m┌─[\x1b[38;5;231mportfolio\x1b[38;5;231m]─[\x1b[38;5;231m~/console\x1b[38;5;231m]\n└──╼ \x1b[38;5;231m❯\x1b[0m "); }],
+        [`show hs`, () => { terminal.writeln(hs_result); terminal.write("\n\x1b[38;5;231m┌─[\x1b[38;5;231mportfolio\x1b[38;5;231m]─[\x1b[38;5;231m~/console\x1b[38;5;231m]\n└──╼ \x1b[38;5;231m❯\x1b[0m "); }],
+        [`show icse`, () => { terminal.writeln(icse_result); terminal.write("\n\x1b[38;5;231m┌─[\x1b[38;5;231mportfolio\x1b[38;5;231m]─[\x1b[38;5;231m~/console\x1b[38;5;231m]\n└──╼ \x1b[38;5;231m❯\x1b[0m "); }],
+        [`ls cf`, () => { terminal.writeln(certificates); terminal.write("\n\x1b[38;5;231m┌─[\x1b[38;5;231mportfolio\x1b[38;5;231m]─[\x1b[38;5;231m~/console\x1b[38;5;231m]\n└──╼ \x1b[38;5;231m❯\x1b[0m "); }],
+        [`fetch linkedin`, () => { terminal.writeln(linkedIn); terminal.write("\n\x1b[38;5;231m┌─[\x1b[38;5;231mportfolio\x1b[38;5;231m]─[\x1b[38;5;231m~/console\x1b[38;5;231m]\n└──╼ \x1b[38;5;231m❯\x1b[0m "); }],
+        [`fetch github`, () => { terminal.writeln(github); terminal.write("\n\x1b[38;5;231m┌─[\x1b[38;5;231mportfolio\x1b[38;5;231m]─[\x1b[38;5;231m~/console\x1b[38;5;231m]\n└──╼ \x1b[38;5;231m❯\x1b[0m "); }],
+        [`fetch x`, () => { terminal.writeln(twitter); terminal.write("\n\x1b[38;5;231m┌─[\x1b[38;5;231mportfolio\x1b[38;5;231m]─[\x1b[38;5;231m~/console\x1b[38;5;231m]\n└──╼ \x1b[38;5;231m❯\x1b[0m "); }],
         [`github ls`, fetchGithubRepos],
         [`ls skill`, showSkills],
-        [`fetch leetcode`, () => { terminal.write(showLeetCode); terminal.write(`\n\x1b[103m \x1b[30m$command/here $ ↵ \x1b[0m\x1b[93m▶\x1b[0m `); }],
+        [`fetch leetcode`, () => { terminal.write(showLeetCode); terminal.write("\n\x1b[38;5;231m┌─[\x1b[38;5;231mportfolio\x1b[38;5;231m]─[\x1b[38;5;231m~/console\x1b[38;5;231m]\n└──╼ \x1b[38;5;231m❯\x1b[0m "); }],
     ]
 );
 
@@ -84,6 +117,6 @@ export const handleCommand = (command: string) => {
     else {
         terminal.write('\x1b[J');
         terminal.writeln(ExistingCommand.get('man'));
-        terminal.write(`\n\x1b[103m \x1b[30m$command/here $ ↵ \x1b[0m\x1b[93m▶\x1b[0m `);
+        terminal.write("\n\x1b[38;5;231m┌─[\x1b[38;5;231mportfolio\x1b[38;5;231m]─[\x1b[38;5;231m~/console\x1b[38;5;231m]\n└──╼ \x1b[38;5;231m❯\x1b[0m ");
     }
 }

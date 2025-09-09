@@ -158,7 +158,7 @@ function showSkills() {
     skills?.map(item => terminal.writeln(`◑  ${item.name.padEnd(28)}[    ${item.progress.padEnd(8)}]`))
   else
     skills?.map((item, i) => terminal.write(`◑  ${i % 3 === 2 ? item.name + '\n' : item.name.padEnd(30)}`))
-  terminal.write("\n\x1b[103m \x1b[30m$command/here $ ↵ \x1b[0m\x1b[93m▶\x1b[0m ");
+  terminal.write("\n\x1b[38;5;231m┌─[\x1b[38;5;231mportfolio\x1b[38;5;231m]─[\x1b[38;5;231m~/console\x1b[38;5;231m]\n└──╼ \x1b[38;5;231m❯\x1b[0m ");
 }
 export {
   mca_final, bsc_final, hs_result, icse_result, certificates, showSkills, showLeetCode
