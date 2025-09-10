@@ -1,10 +1,10 @@
 import { terminal, lastBarrier } from "./components/Terminal"
+import { handleCommand, getMatchingCommands } from './components/Commands'
 import { FitAddon } from '@xterm/addon-fit';
 import { useEffect, useRef } from "react"
 import { WebLinksAddon } from 'xterm-addon-web-links'
 import styles from './App.module.css'
 import toast, { Toaster } from "react-hot-toast";
-import { handleCommand } from './components/Commands'
 
 let temp_str: string[] = [];
 class TrieNode {
@@ -190,6 +190,26 @@ function App() {
       terminalRef.current.focus()
     });
     terminal.onData(async (key: string) => {
+      // Handle Tab key for auto-completion
+      if (key.charCodeAt(0) === 9) { // Tab key
+        if (current_command) {
+          const matches = getMatchingCommands(current_command);
+          if (matches.length === 1) {
+            // Accept the suggestion
+            terminal.write(`\x1b[38;5;231m${matches[0].slice(current_command.length)}`); // Write suggestion in normal color
+            current_command = matches[0]; // Update current command
+          } else if (matches.length > 1) {
+            // Show all possible completions
+            terminal.writeln('');
+            matches.forEach((cmd: string) => {
+              terminal.writeln(`\x1b[38;5;147m❯ \x1b[38;5;231m${cmd}`);
+            });
+            terminal.write("\n\x1b[38;5;39m┌─[\x1b[38;5;231mportfolio\x1b[38;5;39m]─[\x1b[38;5;231m~/console\x1b[38;5;39m]\n└──╼ \x1b[38;5;231m❯\x1b[0m ");
+            terminal.write(current_command);
+          }
+        }
+        return;
+      }
 
       if (key.charCodeAt(0) === 13) {
         console.log(rootNode);
@@ -215,8 +235,32 @@ function App() {
       else if (key.charCodeAt(0) === 127) {
         // Only handle backspace if we have text to delete
         if (current_command.length > 0) {
+          // Clear any existing suggestion first
+          const prevMatches = getMatchingCommands(current_command);
+          if (prevMatches.length === 1) {
+            const suggestionLength = prevMatches[0].length - current_command.length;
+            for (let i = 0; i < suggestionLength; i++) {
+              terminal.write('\x1b[C'); // Move cursor right
+            }
+            for (let i = 0; i < suggestionLength; i++) {
+              terminal.write('\b \b'); // Clear characters
+            }
+          }
+
           terminal.write('\x1b[D \x1b[D'); // Move left, write space, move left again
           current_command = current_command.slice(0, -1);
+
+          // Show new suggestion if any
+          if (current_command.length > 0) {
+            const newMatches = getMatchingCommands(current_command);
+            if (newMatches.length === 1 && newMatches[0] !== current_command) {
+              const suggestion = newMatches[0].slice(current_command.length);
+              terminal.write(`\x1b[38;5;240m${suggestion}\x1b[0m`);
+              for (let i = 0; i < suggestion.length; i++) {
+                terminal.write('\x1b[D');
+              }
+            }
+          }
         }
       }
       else if (key.charCodeAt(0) === 27) {
@@ -224,8 +268,32 @@ function App() {
           return;
       }
       else {
+        // Get current suggestion before adding new character
+        let prevSuggestion = '';
+        if (current_command.length > 0) {
+          const prevMatches = getMatchingCommands(current_command);
+          if (prevMatches.length === 1) {
+            prevSuggestion = prevMatches[0].slice(current_command.length);
+          }
+        }
+
+        // Clear the previous suggestion
+        if (prevSuggestion) {
+          for (let i = 0; i < prevSuggestion.length; i++) {
+            terminal.write('\b \b');
+          }
+        }
+
+        // Add new character and write it
         current_command += key;
-        terminal.write(key)
+        terminal.write(key);
+
+        // Show new suggestion if there's a unique match
+        const matches = getMatchingCommands(current_command);
+        if (matches.length === 1 && matches[0] !== current_command) {
+          const suggestion = matches[0].slice(current_command.length);
+          terminal.write(`\x1b[38;5;240m${suggestion}\x1b[0m`); // Grey color
+        }
       }
 
       if (!current_command) {

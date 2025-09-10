@@ -100,6 +100,16 @@ const ExistingCommand = new Map<string | RegExp, any>(
     ]
 );
 
+export const getMatchingCommands = (partial: string): string[] => {
+    const matches: string[] = [];
+    ExistingCommand.forEach((_, cmd) => {
+        if (typeof cmd === 'string' && cmd.startsWith(partial)) {
+            matches.push(cmd);
+        }
+    });
+    return matches;
+};
+
 export const handleCommand = (command: string) => {
     if (command.includes(`github show`)) {
         const tokenization = command.split(` `);
