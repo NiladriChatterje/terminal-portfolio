@@ -235,30 +235,30 @@ function App() {
       else if (key.charCodeAt(0) === 127) {
         // Only handle backspace if we have text to delete
         if (current_command.length > 0) {
-          // Clear any existing suggestion first
+          // Get current suggestion
+          let currentSuggestion = '';
           const prevMatches = getMatchingCommands(current_command);
           if (prevMatches.length === 1) {
-            const suggestionLength = prevMatches[0].length - current_command.length;
-            for (let i = 0; i < suggestionLength; i++) {
-              terminal.write('\x1b[C'); // Move cursor right
-            }
-            for (let i = 0; i < suggestionLength; i++) {
-              terminal.write('\b \b'); // Clear characters
+            currentSuggestion = prevMatches[0].slice(current_command.length);
+          }
+
+          // Clear the suggestion first if it exists
+          if (currentSuggestion) {
+            for (let i = 0; i < currentSuggestion.length; i++) {
+              terminal.write('\b \b');
             }
           }
 
-          terminal.write('\x1b[D \x1b[D'); // Move left, write space, move left again
+          // Delete the last typed character
+          terminal.write('\b \b');
           current_command = current_command.slice(0, -1);
 
-          // Show new suggestion if any
+          // Show new suggestion if we still have text and there's a match
           if (current_command.length > 0) {
             const newMatches = getMatchingCommands(current_command);
             if (newMatches.length === 1 && newMatches[0] !== current_command) {
               const suggestion = newMatches[0].slice(current_command.length);
               terminal.write(`\x1b[38;5;240m${suggestion}\x1b[0m`);
-              for (let i = 0; i < suggestion.length; i++) {
-                terminal.write('\x1b[D');
-              }
             }
           }
         }
@@ -267,17 +267,15 @@ function App() {
         if (terminal.buffer.active.cursorX <= lastBarrier.lastBarrier)
           return;
       }
-      else {
+      else if (key.charCodeAt(0) >= 32 && key.charCodeAt(0) <= 126) { // Printable characters
         // Get current suggestion before adding new character
         let prevSuggestion = '';
-        if (current_command.length > 0) {
-          const prevMatches = getMatchingCommands(current_command);
-          if (prevMatches.length === 1) {
-            prevSuggestion = prevMatches[0].slice(current_command.length);
-          }
+        const prevMatches = getMatchingCommands(current_command);
+        if (prevMatches.length === 1) {
+          prevSuggestion = prevMatches[0].slice(current_command.length);
         }
 
-        // Clear the previous suggestion
+        // Clear the previous suggestion if it exists
         if (prevSuggestion) {
           for (let i = 0; i < prevSuggestion.length; i++) {
             terminal.write('\b \b');
@@ -294,6 +292,10 @@ function App() {
           const suggestion = matches[0].slice(current_command.length);
           terminal.write(`\x1b[38;5;240m${suggestion}\x1b[0m`); // Grey color
         }
+      } else {
+        // Handle any other non-printable characters
+        current_command += key;
+        terminal.write(key);
       }
 
       if (!current_command) {
