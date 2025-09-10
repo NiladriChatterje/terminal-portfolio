@@ -2,7 +2,7 @@ import { terminal, lastBarrier } from './Terminal';
 import {
     bsc_final, fetchGithubRepos, redirectToRepo, showSkills, showLeetCode,
     certificates, github, hs_result, icse_result, linkedIn, mca_final,
-    twitter
+    twitter, showWorkExperience
 } from './documents'
 
 //I took the help of ASCII chart.. do the same if you want too :)
@@ -97,6 +97,7 @@ const ExistingCommand = new Map<string | RegExp, any>(
         [`github ls`, fetchGithubRepos],
         [`ls skill`, showSkills],
         [`fetch leetcode`, () => { terminal.write(showLeetCode); terminal.write("\n\x1b[38;5;231m┌─[\x1b[38;5;231mportfolio\x1b[38;5;231m]─[\x1b[38;5;231m~/console\x1b[38;5;231m]\n└──╼ \x1b[38;5;231m❯\x1b[0m "); }],
+        [`show work_experience`, showWorkExperience],
     ]
 );
 

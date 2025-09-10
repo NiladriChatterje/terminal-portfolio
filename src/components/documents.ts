@@ -1,3 +1,16 @@
+// Work experience timeline display
+function showWorkExperience() {
+  terminal.writeln('\n');
+  terminal.writeln('  \x1b[38;5;147mWork Experience:\x1b[0m');
+  terminal.writeln('  \x1b[38;5;39m●\x1b[0m SMS Group Private Limited');
+  terminal.writeln('  \x1b[38;5;39m|(August 2024 - July 2025)');
+  terminal.writeln('  \x1b[38;5;39m│\x1b[0m');
+  terminal.writeln('  \x1b[38;5;39m●\x1b[0m Finarb Consulting OPC');
+  terminal.writeln('  \x1b[38;5;39m|(August 2025 - present)');
+  terminal.writeln('\n');
+  terminal.write("\n\x1b[38;5;231m┌─[\x1b[38;5;231mportfolio\x1b[38;5;231m]─[\x1b[38;5;231m~/console\x1b[38;5;231m]\n└──╼ \x1b[38;5;231m❯\x1b[0m ");
+}
+
 import { terminal } from "./Terminal";
 
 const mca_final = `\n
@@ -128,12 +141,10 @@ async function fetchGithubRepos() {
     terminal.writeln(`${"\n Repos".padEnd(38)}${"Pushed"}`)
     terminal.writeln(`-----------------------------------------------`)
     data?.map(item => terminal.writeln(` ${item.name.padEnd(35)}${item.pushed_at?.split('T')[0]}`))
-  }
-  else {
+  } else {
     terminal.writeln(` ${"\n Repos".padEnd(38)}${"Pushed"}\t\t${"Repos".padEnd(38)}${"Pushed"}`)
     terminal.writeln(`-----------------------------------------------\t\t-----------------------------------------------`)
     data?.map((item, i) => terminal.write(` ${item.name.padEnd(35)}${item.pushed_at?.split('T')[0]}${i % 2 ? '\n' : '\t\t'}`))
-
   }
   terminal.write("\n\x1b[103m \x1b[30m$command/here $ ↵ \x1b[0m\x1b[93m▶\x1b[0m ");
 }
@@ -147,8 +158,6 @@ const skills = [{ name: "Java(SE+EE(Servlet))", progress: '65%' },
 { name: "Blockchain(Hybrid)", progress: '38%' },
 { name: "RAG", progress: '42%' },
 { name: "Docker", progress: '36%' }, { name: "Git", progress: '58%' },
-{ name: "Github", progress: '40%' },
-{ name: "Next.Js_14+", progress: '47%' },
 { name: "AWS(CLI+Dash)", progress: '1%' },
 { name: "Node(core+express)", progress: '37%' },
 ]
@@ -160,7 +169,19 @@ function showSkills() {
     skills?.map((item, i) => terminal.write(`◑  ${i % 3 === 2 ? item.name + '\n' : item.name.padEnd(30)}`))
   terminal.write("\n\x1b[38;5;231m┌─[\x1b[38;5;231mportfolio\x1b[38;5;231m]─[\x1b[38;5;231m~/console\x1b[38;5;231m]\n└──╼ \x1b[38;5;231m❯\x1b[0m ");
 }
+
 export {
-  mca_final, bsc_final, hs_result, icse_result, certificates, showSkills, showLeetCode
-  , redirectToRepo, linkedIn, github, fetchGithubRepos, twitter
-}
+  mca_final,
+  bsc_final,
+  hs_result,
+  icse_result,
+  certificates,
+  showSkills,
+  showLeetCode,
+  redirectToRepo,
+  linkedIn,
+  github,
+  fetchGithubRepos,
+  twitter,
+  showWorkExperience
+};
