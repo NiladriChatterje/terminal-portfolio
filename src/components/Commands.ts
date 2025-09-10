@@ -23,7 +23,7 @@ export function clearUpToRow() {
 
    \x1b[38;5;147m⚡ NILADRI\x1b[38;5;240m <Dev/>\x1b[38;5;39m\n` : `
    ╭──────────────────────────────────────────╮
-   │\x1b[38;5;39m██████╗ ██████╗ ██████╗ ████████╗███████╗ ██████╗ ██╗     ██╗ ██████╗│
+   │\x1b[38;5;39m██████╗ ██████╗ ██████╗ ████████╗███████╗  ██████╗ ██╗     ██╗ ██████╗ │
    │██╔══██╗██╔═══██╗██╔══██╗╚══██╔══╝██╔════╝██╔═══██╗██║     ██║██╔═══██╗│
    │██████╔╝██║   ██║██████╔╝   ██║   █████╗  ██║   ██║██║     ██║██║   ██║│
    │██╔═══╝ ██║   ██║██╔══██╗   ██║   ██╔══╝  ██║   ██║██║     ██║██║   ██║│
@@ -54,8 +54,8 @@ export function clearUpToRow() {
 │ \x1b[38;5;231m${date} \x1b[38;5;147m           │
 ├────────────────────┘
 │
-│ \x1b[38;5;231mType 'help' to see available commands
-│ \x1b[38;5;231mType 'clear' to clear the terminal
+│ \x1b[38;5;231mType 'man' to see available commands
+│ \x1b[38;5;231mType 'cls' to clear the terminal
 │ \x1b[38;5;231mUse Tab for command completion
 \x1b[38;5;147m└─────────────────────────────────\n`;
 
@@ -86,6 +86,7 @@ const ExistingCommand = new Map<string | RegExp, any>(
   ${`fetch linkedin`.padEnd(window.innerWidth > 1200 ? 35 : 20)}${`Provide linkedin Profile`}
   ${`fetch x`.padEnd(window.innerWidth > 1200 ? 35 : 20)}${`provide twitter(X) link`}
   ${`github ls`.padEnd(window.innerWidth > 1200 ? 35 : 20)}${`list some of my top projects`}
+  ${`show work_experience`.padEnd(window.innerWidth > 1200 ? 35 : 20)}${`places where I have worked in`}
   ${`github show <repo>`.padEnd(window.innerWidth > 1200 ? 35 : 20)}${`redirect to the repository`}\n`],
         [`cls`, clearUpToRow],
         [`show mca`, showMCAResult],
