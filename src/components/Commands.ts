@@ -71,20 +71,20 @@ function showMCAResult() {
 const ExistingCommand = new Map<string | RegExp, any>(
     [
         ['man', `\n
-  ${`ls skill`.padEnd(window.innerWidth > 1200 ? 35 : 20)}${`list all the skills acquired`}
-  ${`ls cf`.padEnd(window.innerWidth > 1200 ? 35 : 20)}${`list all but only certificates`}
-  ${`cls`.padEnd(window.innerWidth > 1200 ? 35 : 20)}${`clear the console.`}
-  ${`show mca`.padEnd(window.innerWidth > 1200 ? 35 : 20)}${`Display MCA result.`}
-  ${`show bsc`.padEnd(window.innerWidth > 1200 ? 35 : 20)}${`Display BSc(H) result.`}
-  ${`show hs`.padEnd(window.innerWidth > 1200 ? 35 : 20)}${`display Higher Secondary result`}
-  ${`show icse`.padEnd(window.innerWidth > 1200 ? 35 : 20)}${`display Secondary result`}
-  ${`fetch github`.padEnd(window.innerWidth > 1200 ? 35 : 20)}${`Provide github Profile`}
-  ${`fetch leetcode`.padEnd(window.innerWidth > 1200 ? 35 : 20)}${`Provide Leetcode Profile`}
-  ${`fetch linkedin`.padEnd(window.innerWidth > 1200 ? 35 : 20)}${`Provide linkedin Profile`}
-  ${`fetch x`.padEnd(window.innerWidth > 1200 ? 35 : 20)}${`provide twitter(X) link`}
-  ${`github ls`.padEnd(window.innerWidth > 1200 ? 35 : 20)}${`list some of my top projects`}
-  ${`show work_experience`.padEnd(window.innerWidth > 1200 ? 35 : 20)}${`places where I have worked in`}
-  ${`github show <repo>`.padEnd(window.innerWidth > 1200 ? 35 : 20)}${`redirect to the repository`}\n`],
+  ${`ls skill`.padEnd(window.innerWidth > 1200 ? 35 : 23)}${`list all the skills acquired`}
+  ${`ls cf`.padEnd(window.innerWidth > 1200 ? 35 : 23)}${`list all but only certificates`}
+  ${`cls`.padEnd(window.innerWidth > 1200 ? 35 : 23)}${`clear the console.`}
+  ${`show mca`.padEnd(window.innerWidth > 1200 ? 35 : 23)}${`Display MCA result.`}
+  ${`show bsc`.padEnd(window.innerWidth > 1200 ? 35 : 23)}${`Display BSc(H) result.`}
+  ${`show hs`.padEnd(window.innerWidth > 1200 ? 35 : 23)}${`display Higher Secondary result`}
+  ${`show icse`.padEnd(window.innerWidth > 1200 ? 35 : 23)}${`display Secondary result`}
+  ${`fetch github`.padEnd(window.innerWidth > 1200 ? 35 : 23)}${`Provide github Profile`}
+  ${`fetch leetcode`.padEnd(window.innerWidth > 1200 ? 35 : 23)}${`Provide Leetcode Profile`}
+  ${`fetch linkedin`.padEnd(window.innerWidth > 1200 ? 35 : 23)}${`Provide linkedin Profile`}
+  ${`fetch x`.padEnd(window.innerWidth > 1200 ? 35 : 23)}${`provide twitter(X) link`}
+  ${`github ls`.padEnd(window.innerWidth > 1200 ? 35 : 23)}${`list some of my top projects`}
+  ${`show work_experience`.padEnd(window.innerWidth > 1200 ? 35 : 23)}${`places where I have worked in`}
+  ${`github show <repo>`.padEnd(window.innerWidth > 1200 ? 35 : 23)}${`redirect to the repository`}\n`],
         [`cls`, clearUpToRow],
         [`show mca`, showMCAResult],
         [`show bsc`, () => { terminal.writeln(bsc_final); terminal.write("\n\x1b[38;5;231m┌─[\x1b[38;5;231mportfolio\x1b[38;5;231m]─[\x1b[38;5;231m~/console\x1b[38;5;231m]\n└──╼ \x1b[38;5;231m❯\x1b[0m "); }],
