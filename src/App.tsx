@@ -195,8 +195,13 @@ function App() {
         if (current_command) {
           const matches = getMatchingCommands(current_command);
           if (matches.length === 1) {
-            // Accept the suggestion
-            terminal.write(`\x1b[38;5;231m${matches[0].slice(current_command.length)}`); // Write suggestion in normal color
+            // Clear any existing suggestion first
+            const currentSuggestion = matches[0].slice(current_command.length);
+            for (let i = 0; i < currentSuggestion.length; i++) {
+              terminal.write('\b \b');
+            }
+            // Now write the completion in normal color
+            terminal.write(`\x1b[38;5;231m${currentSuggestion}`);
             current_command = matches[0]; // Update current command
           } else if (matches.length > 1) {
             // Show all possible completions
