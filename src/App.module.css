@@ -7,6 +7,30 @@
     top: 50%;
     transform: translate(-50%, -50%);
     overflow-x: clip;
+    font-family: var(--terminal-font);
+    font-size: 18px;
+    line-height: 1.1;
+    font-weight: normal;
+    -webkit-font-smoothing: none;
+    -moz-osx-font-smoothing: unset;
+    letter-spacing: 0.5px;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+#terminal::-webkit-scrollbar {
+    width: 10px;
+    background-color: rgba(2, 2, 2, 0); /* Same as terminal background */
+}
+
+#terminal::-webkit-scrollbar-thumb {
+    background-color: rgba(2, 2, 2, 0); /* Same as terminal background */
+    border-radius: 5px;
+}
+
+#terminal::-webkit-scrollbar-track {
+    display: none;
 }
 
 #terminalContainer {
@@ -21,5 +45,7 @@
     box-shadow: 0 4px 30px rgba(215, 215, 215, 0.1);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
 }

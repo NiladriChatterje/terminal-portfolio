@@ -57,46 +57,47 @@ export function clearUpToRow() {
 \x1b[38;5;147m└─────────────────────────────────\n`;
 
     terminal.write(welcomeMessage)
-    terminal.write("\n\x1b[38;5;231m┌─[\x1b[38;5;231mportfolio\x1b[38;5;231m]─[\x1b[38;5;231m~/console\x1b[38;5;231m]\n└──╼ \x1b[38;5;231m❯\x1b[0m ");
+    terminal.write("\n\x1b[38;5;39m┌─[\x1b[38;5;147mportfolio\x1b[38;5;39m]─[\x1b[38;5;147m~/console\x1b[38;5;39m]\n└─╼ \x1b[38;5;231m❯\x1b[38;5;147m❯\x1b[38;5;39m❯\x1b[0m ");
     lastBarrier.lastBarrier = terminal.buffer.active.cursorX;
 }
 
 function showMCAResult() {
     terminal.writeln(mca_final);
-    terminal.write("\n\x1b[38;5;231m┌─[\x1b[38;5;231mportfolio\x1b[38;5;231m]─[\x1b[38;5;231m~/console\x1b[38;5;231m]\n└──╼ \x1b[38;5;231m❯\x1b[0m ");
+    terminal.write("\n\x1b[38;5;39m┌─[\x1b[38;5;147mportfolio\x1b[38;5;39m]─[\x1b[38;5;147m~/console\x1b[38;5;39m]\n└─╼ \x1b[38;5;231m❯\x1b[38;5;147m❯\x1b[38;5;39m❯\x1b[0m ");
 }
 
 
 
 const ExistingCommand = new Map<string | RegExp, any>(
     [
-        ['man', `\n
-  ${`ls skill`.padEnd(window.innerWidth > 1200 ? 35 : 23)}${`list all the skills acquired`}
-  ${`ls cf`.padEnd(window.innerWidth > 1200 ? 35 : 23)}${`list all but only certificates`}
-  ${`cls`.padEnd(window.innerWidth > 1200 ? 35 : 23)}${`clear the console.`}
-  ${`show mca`.padEnd(window.innerWidth > 1200 ? 35 : 23)}${`Display MCA result.`}
-  ${`show bsc`.padEnd(window.innerWidth > 1200 ? 35 : 23)}${`Display BSc(H) result.`}
-  ${`show hs`.padEnd(window.innerWidth > 1200 ? 35 : 23)}${`display Higher Secondary result`}
-  ${`show icse`.padEnd(window.innerWidth > 1200 ? 35 : 23)}${`display Secondary result`}
-  ${`fetch github`.padEnd(window.innerWidth > 1200 ? 35 : 23)}${`Provide github Profile`}
-  ${`fetch leetcode`.padEnd(window.innerWidth > 1200 ? 35 : 23)}${`Provide Leetcode Profile`}
-  ${`fetch linkedin`.padEnd(window.innerWidth > 1200 ? 35 : 23)}${`Provide linkedin Profile`}
-  ${`fetch x`.padEnd(window.innerWidth > 1200 ? 35 : 23)}${`provide twitter(X) link`}
-  ${`github ls`.padEnd(window.innerWidth > 1200 ? 35 : 23)}${`list some of my top projects`}
-  ${`show work_experience`.padEnd(window.innerWidth > 1200 ? 35 : 23)}${`places where I have worked in`}
-  ${`github show <repo>`.padEnd(window.innerWidth > 1200 ? 35 : 23)}${`redirect to the repository`}\n`],
+        ['man', `\n\x1b[38;5;147m┌────────────────── Available Commands ──────────────────┐\x1b[0m\n
+  \x1b[38;5;39m│\x1b[0m \x1b[38;5;147m${`ls skill`.padEnd(window.innerWidth > 1200 ? 35 : 23)}\x1b[38;5;39m│\x1b[0m List all the skills acquired
+  \x1b[38;5;39m│\x1b[0m \x1b[38;5;147m${`ls cf`.padEnd(window.innerWidth > 1200 ? 35 : 23)}\x1b[38;5;39m│\x1b[0m List certificates and achievements
+  \x1b[38;5;39m│\x1b[0m \x1b[38;5;147m${`cls`.padEnd(window.innerWidth > 1200 ? 35 : 23)}\x1b[38;5;39m│\x1b[0m Clear the terminal
+  \x1b[38;5;39m│\x1b[0m \x1b[38;5;147m${`show mca`.padEnd(window.innerWidth > 1200 ? 35 : 23)}\x1b[38;5;39m│\x1b[0m Display MCA academic results
+  \x1b[38;5;39m│\x1b[0m \x1b[38;5;147m${`show bsc`.padEnd(window.innerWidth > 1200 ? 35 : 23)}\x1b[38;5;39m│\x1b[0m Display BSc(H) academic results
+  \x1b[38;5;39m│\x1b[0m \x1b[38;5;147m${`show hs`.padEnd(window.innerWidth > 1200 ? 35 : 23)}\x1b[38;5;39m│\x1b[0m Display Higher Secondary results
+  \x1b[38;5;39m│\x1b[0m \x1b[38;5;147m${`show icse`.padEnd(window.innerWidth > 1200 ? 35 : 23)}\x1b[38;5;39m│\x1b[0m Display Secondary results
+  \x1b[38;5;39m│\x1b[0m \x1b[38;5;147m${`fetch github`.padEnd(window.innerWidth > 1200 ? 35 : 23)}\x1b[38;5;39m│\x1b[0m View GitHub profile
+  \x1b[38;5;39m│\x1b[0m \x1b[38;5;147m${`fetch leetcode`.padEnd(window.innerWidth > 1200 ? 35 : 23)}\x1b[38;5;39m│\x1b[0m View LeetCode profile
+  \x1b[38;5;39m│\x1b[0m \x1b[38;5;147m${`fetch linkedin`.padEnd(window.innerWidth > 1200 ? 35 : 23)}\x1b[38;5;39m│\x1b[0m View LinkedIn profile
+  \x1b[38;5;39m│\x1b[0m \x1b[38;5;147m${`fetch x`.padEnd(window.innerWidth > 1200 ? 35 : 23)}\x1b[38;5;39m│\x1b[0m View Twitter/X profile
+  \x1b[38;5;39m│\x1b[0m \x1b[38;5;147m${`github ls`.padEnd(window.innerWidth > 1200 ? 35 : 23)}\x1b[38;5;39m│\x1b[0m List featured projects
+  \x1b[38;5;39m│\x1b[0m \x1b[38;5;147m${`show work_experience`.padEnd(window.innerWidth > 1200 ? 35 : 23)}\x1b[38;5;39m│\x1b[0m View work experience timeline
+  \x1b[38;5;39m│\x1b[0m \x1b[38;5;147m${`github show <repo>`.padEnd(window.innerWidth > 1200 ? 35 : 23)}\x1b[38;5;39m│\x1b[0m Open repository in browser
+\x1b[38;5;147m└──────────────────────────────────────────────────────┘\x1b[0m\n`],
         [`cls`, clearUpToRow],
         [`show mca`, showMCAResult],
-        [`show bsc`, () => { terminal.writeln(bsc_final); terminal.write("\n\x1b[38;5;231m┌─[\x1b[38;5;231mportfolio\x1b[38;5;231m]─[\x1b[38;5;231m~/console\x1b[38;5;231m]\n└──╼ \x1b[38;5;231m❯\x1b[0m "); }],
-        [`show hs`, () => { terminal.writeln(hs_result); terminal.write("\n\x1b[38;5;231m┌─[\x1b[38;5;231mportfolio\x1b[38;5;231m]─[\x1b[38;5;231m~/console\x1b[38;5;231m]\n└──╼ \x1b[38;5;231m❯\x1b[0m "); }],
-        [`show icse`, () => { terminal.writeln(icse_result); terminal.write("\n\x1b[38;5;231m┌─[\x1b[38;5;231mportfolio\x1b[38;5;231m]─[\x1b[38;5;231m~/console\x1b[38;5;231m]\n└──╼ \x1b[38;5;231m❯\x1b[0m "); }],
-        [`ls cf`, () => { terminal.writeln(certificates); terminal.write("\n\x1b[38;5;231m┌─[\x1b[38;5;231mportfolio\x1b[38;5;231m]─[\x1b[38;5;231m~/console\x1b[38;5;231m]\n└──╼ \x1b[38;5;231m❯\x1b[0m "); }],
-        [`fetch linkedin`, () => { terminal.writeln(linkedIn); terminal.write("\n\x1b[38;5;231m┌─[\x1b[38;5;231mportfolio\x1b[38;5;231m]─[\x1b[38;5;231m~/console\x1b[38;5;231m]\n└──╼ \x1b[38;5;231m❯\x1b[0m "); }],
-        [`fetch github`, () => { terminal.writeln(github); terminal.write("\n\x1b[38;5;231m┌─[\x1b[38;5;231mportfolio\x1b[38;5;231m]─[\x1b[38;5;231m~/console\x1b[38;5;231m]\n└──╼ \x1b[38;5;231m❯\x1b[0m "); }],
-        [`fetch x`, () => { terminal.writeln(twitter); terminal.write("\n\x1b[38;5;231m┌─[\x1b[38;5;231mportfolio\x1b[38;5;231m]─[\x1b[38;5;231m~/console\x1b[38;5;231m]\n└──╼ \x1b[38;5;231m❯\x1b[0m "); }],
+        [`show bsc`, () => { terminal.writeln(bsc_final); terminal.write("\n\x1b[38;5;39m┌─[\x1b[38;5;147mportfolio\x1b[38;5;39m]─[\x1b[38;5;147m~/console\x1b[38;5;39m]\n└─╼ \x1b[38;5;231m❯\x1b[38;5;147m❯\x1b[38;5;39m❯\x1b[0m "); }],
+        [`show hs`, () => { terminal.writeln(hs_result); terminal.write("\n\x1b[38;5;39m┌─[\x1b[38;5;147mportfolio\x1b[38;5;39m]─[\x1b[38;5;147m~/console\x1b[38;5;39m]\n└─╼ \x1b[38;5;231m❯\x1b[38;5;147m❯\x1b[38;5;39m❯\x1b[0m "); }],
+        [`show icse`, () => { terminal.writeln(icse_result); terminal.write("\n\x1b[38;5;39m┌─[\x1b[38;5;147mportfolio\x1b[38;5;39m]─[\x1b[38;5;147m~/console\x1b[38;5;39m]\n└─╼ \x1b[38;5;231m❯\x1b[38;5;147m❯\x1b[38;5;39m❯\x1b[0m "); }],
+        [`ls cf`, () => { terminal.writeln(certificates); terminal.write("\n\x1b[38;5;39m┌─[\x1b[38;5;147mportfolio\x1b[38;5;39m]─[\x1b[38;5;147m~/console\x1b[38;5;39m]\n└─╼ \x1b[38;5;231m❯\x1b[38;5;147m❯\x1b[38;5;39m❯\x1b[0m "); }],
+        [`fetch linkedin`, () => { terminal.writeln(linkedIn); terminal.write("\n\x1b[38;5;39m┌─[\x1b[38;5;147mportfolio\x1b[38;5;39m]─[\x1b[38;5;147m~/console\x1b[38;5;39m]\n└─╼ \x1b[38;5;231m❯\x1b[38;5;147m❯\x1b[38;5;39m❯\x1b[0m "); }],
+        [`fetch github`, () => { terminal.writeln(github); terminal.write("\n\x1b[38;5;39m┌─[\x1b[38;5;147mportfolio\x1b[38;5;39m]─[\x1b[38;5;147m~/console\x1b[38;5;39m]\n└─╼ \x1b[38;5;231m❯\x1b[38;5;147m❯\x1b[38;5;39m❯\x1b[0m "); }],
+        [`fetch x`, () => { terminal.writeln(twitter); terminal.write("\n\x1b[38;5;39m┌─[\x1b[38;5;147mportfolio\x1b[38;5;39m]─[\x1b[38;5;147m~/console\x1b[38;5;39m]\n└─╼ \x1b[38;5;231m❯\x1b[38;5;147m❯\x1b[38;5;39m❯\x1b[0m "); }],
         [`github ls`, fetchGithubRepos],
         [`ls skill`, showSkills],
-        [`fetch leetcode`, () => { terminal.write(showLeetCode); terminal.write("\n\x1b[38;5;231m┌─[\x1b[38;5;231mportfolio\x1b[38;5;231m]─[\x1b[38;5;231m~/console\x1b[38;5;231m]\n└──╼ \x1b[38;5;231m❯\x1b[0m "); }],
+        [`fetch leetcode`, () => { terminal.write(showLeetCode); terminal.write("\n\x1b[38;5;39m┌─[\x1b[38;5;147mportfolio\x1b[38;5;39m]─[\x1b[38;5;147m~/console\x1b[38;5;39m]\n└─╼ \x1b[38;5;231m❯\x1b[38;5;147m❯\x1b[38;5;39m❯\x1b[0m "); }],
         [`show work_experience`, showWorkExperience],
     ]
 );

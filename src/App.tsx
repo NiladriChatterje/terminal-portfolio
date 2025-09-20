@@ -89,7 +89,7 @@ class Trie {
       terminal.write(` \x1b[38;5;39m│\x1b[38;5;147m❯ \x1b[38;5;231m${item.length > 25
         ? `${item.slice(0, 23)}...`.padEnd(window.innerWidth < 1200 ? 30 : 45)
         : item.padEnd(window.innerWidth < 1200 ? 30 : 45)
-        }\x1b[38;5;240m [history]\x1b[0m\n`)
+        }\x1b[38;5;39m[\x1b[38;5;147mhistory\x1b[38;5;39m]\x1b[0m\n`)
     })
 
     for (let i = 0; i <= temp_str.length; i++)
@@ -148,7 +148,7 @@ function App() {
    │╚═╝      ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚═╝      ╚═════╝ ╚══════╝╚═╝ ╚═════╝ │
    ╰──────────────────────────────────────────╯
 
-   \x1b[38;5;147m⚡ NILADRI CHATTERJEE \x1b[38;5;240m<Full Stack Developer/>\x1b[38;5;39m\n`);
+   \x1b[38;5;147m NILADRI CHATTERJEE \x1b[38;5;240m<Full Stack Developer/>\x1b[38;5;39m\n`);
 
     // Add decorative line below the header
     terminal.write('\x1b[38;5;39m   ┏');
@@ -156,9 +156,9 @@ function App() {
 
     // Add separator line
     terminal.write('\x1b[38;5;39m');  // Set blue color
-    for (let i = 0; i < terminal.cols; i++) {
+    for (let i = 0; i < terminal.cols; i++)
       terminal.write('━');
-    }
+
     terminal.write('\x1b[0m\n');
 
     terminal.focus();
@@ -207,9 +207,9 @@ function App() {
             // Show all possible completions
             terminal.writeln('');
             matches.forEach((cmd: string) => {
-              terminal.writeln(`\x1b[38;5;147m❯ \x1b[38;5;231m${cmd}`);
+              terminal.writeln(`\x1b[38;5;39m│\x1b[38;5;147m❯ \x1b[38;5;231m${cmd}`);
             });
-            terminal.write("\n\x1b[38;5;39m┌─[\x1b[38;5;231mportfolio\x1b[38;5;39m]─[\x1b[38;5;231m~/console\x1b[38;5;39m]\n└──╼ \x1b[38;5;231m❯\x1b[0m ");
+            terminal.write("\n\x1b[38;5;39m┌─[\x1b[38;5;147mportfolio\x1b[38;5;39m]─[\x1b[38;5;147m~/console\x1b[38;5;39m]\n└─╼ \x1b[38;5;231m❯\x1b[38;5;147m❯\x1b[38;5;39m❯\x1b[0m ");
             terminal.write(current_command);
           }
         }
@@ -324,19 +324,19 @@ function App() {
         hour12: true
       });
 
-      return `\x1b[38;5;147m┌─══ \x1b[38;5;231mWelcome ${username} \x1b[38;5;147m══─┐
-│ \x1b[38;5;231m${date} \x1b[38;5;147m           │
-├────────────────────┘
-│
-│ \x1b[38;5;231mType 'man' to see available commands
-│ \x1b[38;5;231mType 'cls' to clear the terminal
-│ \x1b[38;5;231mUse Tab for command completion
-\x1b[38;5;147m└─────────────────────────────────\n`;
+      return `\x1b[38;5;147m┌────────\x1b[38;5;39m═\x1b[38;5;147m[ \x1b[38;5;231mWelcome ${username} \x1b[38;5;147m]\x1b[38;5;39m═\x1b[38;5;147m──────────────┐
+\x1b[38;5;147m│ \x1b[38;5;147m[\x1b[38;5;39m⌚\x1b[38;5;147m] \x1b[38;5;231m${date}                            \x1b[38;5;147m│
+\x1b[38;5;147m├─────────────────────────────────────────┤
+\x1b[38;5;147m│                                         │
+\x1b[38;5;147m│ \x1b[38;5;39m❯\x1b[38;5;231m Type \x1b[38;5;147mman\x1b[38;5;231m for available commands       \x1b[38;5;147m│
+\x1b[38;5;147m│ \x1b[38;5;39m❯\x1b[38;5;231m Type \x1b[38;5;147mcls\x1b[38;5;231m to clear terminal            \x1b[38;5;147m│
+\x1b[38;5;147m│ \x1b[38;5;39m❯\x1b[38;5;231m Use \x1b[38;5;147mTab\x1b[38;5;231m for auto-completion           \x1b[38;5;147m│
+\x1b[38;5;147m└─────────────────────────────────────────┘\n`;
     }
 
     const welcomeMessage = createWelcomeMessage();
     terminal.write(welcomeMessage);
-    terminal.write("\n\x1b[38;5;39m┌─[\x1b[38;5;231mportfolio\x1b[38;5;39m]─[\x1b[38;5;231m~/console\x1b[38;5;39m]\n└──╼ \x1b[38;5;231m❯\x1b[0m ");
+    terminal.write("\n\x1b[38;5;39m┌─[\x1b[38;5;147mportfolio\x1b[38;5;39m]─[\x1b[38;5;147m~/console\x1b[38;5;39m]\n└─╼ \x1b[38;5;231m❯\x1b[38;5;147m❯\x1b[38;5;39m❯\x1b[0m ");
   }, []);
 
   return (
