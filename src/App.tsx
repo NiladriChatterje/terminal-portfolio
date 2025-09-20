@@ -152,12 +152,13 @@ function App() {
 
     // Add decorative line below the header
     terminal.write('\x1b[38;5;39m   ┏');
+    // Fill the line with ━ characters to the end of the terminal width
+    const terminalWidth = Math.floor(terminal.cols);
+    terminal.write('━'.repeat(terminalWidth - 5)); // -5 to account for the starting characters
     terminal.write('\x1b[38;5;39m┓\n\n');
 
     // Add separator line
     terminal.write('\x1b[38;5;39m');  // Set blue color
-    for (let i = 0; i < terminal.cols; i++)
-      terminal.write('━');
 
     terminal.write('\x1b[0m\n');
 
@@ -325,7 +326,7 @@ function App() {
       });
 
       return `\x1b[38;5;147m┌────────\x1b[38;5;39m═\x1b[38;5;147m[ \x1b[38;5;231mWelcome ${username} \x1b[38;5;147m]\x1b[38;5;39m═\x1b[38;5;147m──────────────┐
-\x1b[38;5;147m│ \x1b[38;5;147m[\x1b[38;5;39m⌚\x1b[38;5;147m] \x1b[38;5;231m${date}                            \x1b[38;5;147m│
+\x1b[38;5;147m│ \x1b[38;5;147m[\x1b[38;5;39m⌚\x1b[38;5;147m] \x1b[38;5;231m${date}                             \x1b[38;5;147m│
 \x1b[38;5;147m├─────────────────────────────────────────┤
 \x1b[38;5;147m│                                         │
 \x1b[38;5;147m│ \x1b[38;5;39m❯\x1b[38;5;231m Type \x1b[38;5;147mman\x1b[38;5;231m for available commands       \x1b[38;5;147m│
