@@ -15,7 +15,23 @@ class TrieNode {
     this.letter = letter;
   }
 }
+export function createWelcomeMessage() {
+  const username = 'Guest';
+  const date = new Date().toLocaleString('en-US', {
+    hour: 'numeric',
+    minute: '2-digit',
+    hour12: true
+  });
 
+  return `\x1b[38;5;147m┌────────\x1b[38;5;39m═\x1b[38;5;147m[ \x1b[38;5;231mWelcome ${username} \x1b[38;5;147m]\x1b[38;5;39m═\x1b[38;5;147m──────────────┐
+\x1b[38;5;147m│ \x1b[38;5;147m[\x1b[38;5;39m⌚\x1b[38;5;147m] \x1b[38;5;231m${date}                             \x1b[38;5;147m│
+\x1b[38;5;147m├─────────────────────────────────────────┤
+\x1b[38;5;147m│                                         │
+\x1b[38;5;147m│ \x1b[38;5;39m❯\x1b[38;5;231m Type \x1b[38;5;147mman\x1b[38;5;231m for available commands       \x1b[38;5;147m│
+\x1b[38;5;147m│ \x1b[38;5;39m❯\x1b[38;5;231m Type \x1b[38;5;147mcls\x1b[38;5;231m to clear terminal            \x1b[38;5;147m│
+\x1b[38;5;147m│ \x1b[38;5;39m❯\x1b[38;5;231m Use \x1b[38;5;147mTab\x1b[38;5;231m for auto-completion           \x1b[38;5;147m│
+\x1b[38;5;147m└─────────────────────────────────────────┘\n`;
+}
 class Trie {
   HEAD: TrieNode;
   temp: TrieNode | any;
@@ -317,23 +333,7 @@ function App() {
     debouncer();
 
 
-    function createWelcomeMessage() {
-      const username = 'Guest';
-      const date = new Date().toLocaleString('en-US', {
-        hour: 'numeric',
-        minute: '2-digit',
-        hour12: true
-      });
 
-      return `\x1b[38;5;147m┌────────\x1b[38;5;39m═\x1b[38;5;147m[ \x1b[38;5;231mWelcome ${username} \x1b[38;5;147m]\x1b[38;5;39m═\x1b[38;5;147m──────────────┐
-\x1b[38;5;147m│ \x1b[38;5;147m[\x1b[38;5;39m⌚\x1b[38;5;147m] \x1b[38;5;231m${date}                             \x1b[38;5;147m│
-\x1b[38;5;147m├─────────────────────────────────────────┤
-\x1b[38;5;147m│                                         │
-\x1b[38;5;147m│ \x1b[38;5;39m❯\x1b[38;5;231m Type \x1b[38;5;147mman\x1b[38;5;231m for available commands       \x1b[38;5;147m│
-\x1b[38;5;147m│ \x1b[38;5;39m❯\x1b[38;5;231m Type \x1b[38;5;147mcls\x1b[38;5;231m to clear terminal            \x1b[38;5;147m│
-\x1b[38;5;147m│ \x1b[38;5;39m❯\x1b[38;5;231m Use \x1b[38;5;147mTab\x1b[38;5;231m for auto-completion           \x1b[38;5;147m│
-\x1b[38;5;147m└─────────────────────────────────────────┘\n`;
-    }
 
     const welcomeMessage = createWelcomeMessage();
     terminal.write(welcomeMessage);

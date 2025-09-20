@@ -1,3 +1,4 @@
+import { createWelcomeMessage } from '../App';
 import { terminal, lastBarrier } from './Terminal';
 import {
     bsc_final, fetchGithubRepos, redirectToRepo, showSkills, showLeetCode,
@@ -18,7 +19,7 @@ export function clearUpToRow() {
    │╩  ╚═╝╩╚═ ╩ ╚  ╚═╝╩═╝╩╚═╝│
    ╰───────────────────────────╯
 
-    \x1b[38;5;147m⚡ NILADRI CHATTERJEE \x1b[38;5;240m<Full Stack Developer/>\x1b[38;5;39m\n` : `
+   \x1b[38;5;147m⚡ NILADRI CHATTERJEE \x1b[38;5;240m<Full Stack Developer/>\x1b[38;5;39m\n` : `
    ╭──────────────────────────────────────────╮
    │\x1b[38;5;39m██████╗ ██████╗ ██████╗ ████████╗███████╗  ██████╗ ██╗     ██╗ ██████╗ │
    │██╔══██╗██╔═══██╗██╔══██╗╚══██╔══╝██╔════╝██╔═══██╗██║     ██║██╔═══██╗│
@@ -28,33 +29,22 @@ export function clearUpToRow() {
    │╚═╝      ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚═╝      ╚═════╝ ╚══════╝╚═╝ ╚═════╝ │
    ╰──────────────────────────────────────────╯
 
-   \x1b[38;5;147m⚡ NILADRI CHATTERJEE \x1b[38;5;240m<Full Stack Developer/>\x1b[38;5;39m\n`);
+   \x1b[38;5;147m NILADRI CHATTERJEE \x1b[38;5;240m<Full Stack Developer/>\x1b[38;5;39m\n`);
 
     // Add decorative line below the header
     terminal.write('\x1b[38;5;39m   ┏');
+    // Fill the line with ━ characters to the end of the terminal width
+    const terminalWidth = Math.floor(terminal.cols);
+    terminal.write('━'.repeat(terminalWidth - 5)); // -5 to account for the starting characters
     terminal.write('\x1b[38;5;39m┓\n\n');
 
-    // Add separator line in blue
+    // Add separator line
     terminal.write('\x1b[38;5;39m');  // Set blue color
-    for (let i = 0; i < terminal.cols; i++) {
-        terminal.write('━');
-    }
+
     terminal.write('\x1b[0m\n');
 
-    const date = new Date().toLocaleString('en-US', {
-        hour: 'numeric',
-        minute: '2-digit',
-        hour12: true
-    });
 
-    const welcomeMessage = `\x1b[38;5;147m┌─══ \x1b[38;5;231mWelcome Guest \x1b[38;5;147m══─┐
-│ \x1b[38;5;231m${date} \x1b[38;5;147m           │
-├────────────────────┘
-│
-│ \x1b[38;5;231mType 'man' to see available commands
-│ \x1b[38;5;231mType 'cls' to clear the terminal
-│ \x1b[38;5;231mUse Tab for command completion
-\x1b[38;5;147m└─────────────────────────────────\n`;
+    const welcomeMessage = createWelcomeMessage();
 
     terminal.write(welcomeMessage)
     terminal.write("\n\x1b[38;5;39m┌─[\x1b[38;5;147mportfolio\x1b[38;5;39m]─[\x1b[38;5;147m~/console\x1b[38;5;39m]\n└─╼ \x1b[38;5;231m❯\x1b[38;5;147m❯\x1b[38;5;39m❯\x1b[0m ");
