@@ -25,10 +25,12 @@ a:hover {
 body {
   margin: 0;
   display: flex;
-  background-color: #1e1e1e;
-  background-image: url('assets/background.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
+  background-color: #050812;
+  background-image: 
+    radial-gradient(circle at 10% 10%, rgba(0, 175, 255, 0.15) 0%, transparent 40%),
+    radial-gradient(circle at 90% 90%, rgba(147, 147, 255, 0.15) 0%, transparent 40%),
+    radial-gradient(circle at 50% 50%, rgba(83, 91, 242, 0.1) 0%, transparent 60%);
+  background-attachment: fixed;
   place-items: center;
   width: 100%;
   min-height: 100vh;
@@ -37,15 +39,12 @@ body {
 
 body::after {
   content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  filter: blur(30px);
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  opacity: 0.04;
   pointer-events: none;
-  background-color: rgba(32, 32, 32, 0.363);
+  z-index: 9999;
 }
 
 @media all and (max-width:950px) {
