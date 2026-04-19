@@ -232,56 +232,57 @@ async function fetchGithubRepos() {
 }
 
 const skills = [
-  { name: "Java(SE+EE(Servlet))", progress: '65%', category: 'Languages & Frameworks' },
-  { name: "Node(core+express)", progress: '37%', category: 'Languages & Frameworks' },
-  { name: "Blockchain(Hybrid)", progress: '38%', category: 'Technologies' },
-  { name: "RAG", progress: '42%', category: 'AI & ML' },
-  { name: "Docker", progress: '36%', category: 'DevOps' },
-  { name: "Git", progress: '58%', category: 'DevOps' },
-  { name: "AWS(CLI+Dash)", progress: '1%', category: 'Cloud' },
+  { name: "Java(SE+EE(Servlet))", category: 'Languages & Frameworks' },
+  { name: "Node(core+express)", category: 'Languages & Frameworks' },
+  { name: "FastAPI(Celery)", category: 'Languages & Frameworks' },
+  { name: "React Native", category: 'Languages & Frameworks' },
+  { name: "Electron JS", category: 'Languages & Frameworks' },
+  { name: "Blockchain(Hybrid)", category: 'Technologies' },
+  { name: "Redis(Cluster+VDB+Socket.io)", category: 'Databases' },
+  { name: "SQL", category: 'Databases' },
+  { name: "GraphQL", category: 'Technologies' },
+  { name: "WebRTC", category: 'Technologies' },
+  { name: "MCP(App->Servers)", category: 'Technologies' },
+  { name: "RAG", category: 'AI & ML' },
+  { name: "Docker", category: 'DevOps' },
+  { name: "Git", category: 'DevOps' },
+  { name: "AWS(CLI+Dash)", category: 'Cloud' },
+  { name: "Azure(Resources+CAE+KQL)", category: 'Cloud' },
 ];
-
-function createProgressBar(progress: string) {
-  const percentage = parseInt(progress);
-  const filledLength = Math.floor(percentage / 5); // 20 characters total
-  const emptyLength = 20 - filledLength;
-
-  return `\x1b[38;5;39m[${'■'.repeat(filledLength)}${' '.repeat(emptyLength)}] ${progress}\x1b[0m`;
-}
 
 function showSkills() {
   terminal.writeln('\n\x1b[38;5;147m┌──────────────── Technical Skills ─────────────────┐\x1b[0m');
+  const categories = [...new Set(skills.map(s => s.category))];
 
-  if (window.innerWidth < 1280) {
-    // Mobile view - Vertical layout with progress bars
-    const categories = [...new Set(skills.map(s => s.category))];
-
+  if (window.innerWidth < 768) {
+    // Mobile view - Compact vertical layout
     categories.forEach(category => {
       terminal.writeln(`\n  \x1b[38;5;147m◆ ${category}\x1b[0m`);
       const categorySkills = skills.filter(s => s.category === category);
 
-      categorySkills.forEach(skill => {
-        terminal.writeln(`    \x1b[38;5;39m│\x1b[0m \x1b[38;5;231m${skill.name.padEnd(25)}\x1b[0m`);
-        terminal.writeln(`    \x1b[38;5;39m└─\x1b[0m ${createProgressBar(skill.progress)}`);
+      categorySkills.forEach((skill) => {
+        terminal.writeln(`    \x1b[38;5;39m›\x1b[38;5;231m ${skill.name}\x1b[0m`);
       });
     });
   } else {
-    // Desktop view - Grid layout with categories
-    const categories = [...new Set(skills.map(s => s.category))];
-
+    // Desktop view - Clean 2-column layout
     categories.forEach(category => {
       terminal.writeln(`\n  \x1b[38;5;147m◆ ${category}\x1b[0m`);
       const categorySkills = skills.filter(s => s.category === category);
 
-      categorySkills.forEach((skill, index) => {
-        if (index > 0 && index % 2 === 0) terminal.writeln('');
-        terminal.write(`    \x1b[38;5;39m│\x1b[0m \x1b[38;5;231m${skill.name.padEnd(25)}\x1b[0m ${createProgressBar(skill.progress)}${index % 2 === 0 ? '    ' : '\n'}`);
-      });
-      if (categorySkills.length % 2 !== 0) terminal.writeln('');
+      for (let i = 0; i < categorySkills.length; i += 2) {
+        const skill1 = categorySkills[i];
+        const skill2 = categorySkills[i + 1];
+
+        const col1 = `    \x1b[38;5;39m›\x1b[38;5;231m ${skill1.name.padEnd(32)}\x1b[0m`;
+        const col2 = skill2 ? `\x1b[38;5;39m›\x1b[38;5;231m ${skill2.name}\x1b[0m` : '';
+
+        terminal.writeln(col1 + col2);
+      }
     });
   }
 
-  terminal.writeln('\x1b[38;5;147m└─────────────────────────────────────────────────┘\x1b[0m');
+  terminal.writeln('\n\x1b[38;5;147m└─────────────────────────────────────────────────┘\x1b[0m');
   terminal.write("\n\x1b[38;5;39m┌─[\x1b[38;5;147mportfolio\x1b[38;5;39m]─[\x1b[38;5;147m~/console\x1b[38;5;39m]\n└─╼ \x1b[38;5;231m❯\x1b[38;5;147m❯\x1b[38;5;39m❯\x1b[0m ");
 }
 

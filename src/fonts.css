@@ -1,5 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Fira+Code:wght@400;500&display=swap');
 
 :root {
-    --terminal-font: 'VT323', Ubuntu, sans-serif;
+    --terminal-font: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Source Code Pro', 'Monaco', 'Consolas', monospace;
+}
+
+/* Optimize font rendering for terminal text */
+* {
+    -webkit-font-feature-settings: "liga" 0, "calt" 0;
+    font-feature-settings: "liga" 0, "calt" 0;
+    text-rendering: optimizeLegibility;
 }
