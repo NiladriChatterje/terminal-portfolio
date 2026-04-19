@@ -20,11 +20,12 @@ export function createWelcomeMessage() {
   const date = new Date().toLocaleString('en-US', {
     hour: 'numeric',
     minute: '2-digit',
+    second: '2-digit',
     hour12: true
   });
 
   return `\x1b[38;5;147m┌────────\x1b[38;5;39m═\x1b[38;5;147m[ \x1b[38;5;231mWelcome ${username} \x1b[38;5;147m]\x1b[38;5;39m═\x1b[38;5;147m──────────────┐
-\x1b[38;5;147m│ \x1b[38;5;147m[\x1b[38;5;39m⌚\x1b[38;5;147m] \x1b[38;5;231m${date}                            \x1b[38;5;147m│
+\x1b[38;5;147m│ \x1b[38;5;147m[\x1b[38;5;39m⌚\x1b[38;5;147m] \x1b[38;5;231m${date.padEnd(36)}\x1b[38;5;147m│
 \x1b[38;5;147m├─────────────────────────────────────────┤
 \x1b[38;5;147m│                                         │
 \x1b[38;5;147m│ \x1b[38;5;39m❯\x1b[38;5;231m Type \x1b[38;5;147mman\x1b[38;5;231m for available commands       \x1b[38;5;147m│
@@ -338,6 +339,28 @@ function App() {
     const welcomeMessage = createWelcomeMessage();
     terminal.write(welcomeMessage);
     terminal.write("\n\x1b[38;5;39m┌─[\x1b[38;5;147mportfolio\x1b[38;5;39m]─[\x1b[38;5;147m~/console\x1b[38;5;39m]\n└─╼ \x1b[38;5;231m❯\x1b[38;5;147m❯\x1b[38;5;39m❯\x1b[0m ");
+
+    // Live clock update for the welcome message
+    const clockInterval = setInterval(() => {
+      const buffer = terminal.buffer.active;
+      for (let i = 0; i < buffer.length; i++) {
+        const line = buffer.getLine(i);
+        if (line && line.translateToString(true).includes('⌚')) {
+          const viewportY = buffer.viewportY;
+          const rowInViewport = i - viewportY;
+          if (rowInViewport >= 0 && rowInViewport < terminal.rows) {
+            const newTime = new Date().toLocaleString('en-US', { hour: 'numeric', minute: '2-digit', second: '2-digit', hour12: true });
+            terminal.write('\x1b7'); // Save cursor
+            terminal.write(`\x1b[${rowInViewport + 1};1H`); // Move to start of row
+            terminal.write(`\x1b[38;5;147m│ \x1b[38;5;147m[\x1b[38;5;39m⌚\x1b[38;5;147m] \x1b[38;5;231m${newTime.padEnd(36)}\x1b[38;5;147m│`);
+            terminal.write('\x1b8'); // Restore cursor
+          }
+          break; // Stop after finding the line
+        }
+      }
+    }, 1000);
+
+    return () => clearInterval(clockInterval);
   }, []);
 
   return (
